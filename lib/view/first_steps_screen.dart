@@ -13,18 +13,24 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
    @override
    Widget build(BuildContext context) {
        return Scaffold(
-           appBar: AppBar(title: const Text(''),),
+           appBar: AppBar(toolbarOpacity: 1,),
            body: Container(
-              color: Colors.amber,
+            alignment: Alignment.center,
+              color: const Color(0xFF3F80EA),
              child: Padding(
-              
                padding: const EdgeInsets.all(15.0),
                child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const Text('A.D.A'),
+                  const Text('Alert Disaster Assist'),
+
+                  const Icon(Icons.ac_unit_sharp),
+
                   OutlinedButton.icon(
                     onPressed: ()=>{
                       Navigator.pushNamed(context, '/mainPage')
-                    }, 
+                    },
                     label: const Text('Login with Google'),
                     // child: Text('Login with Google'),
                     icon: const Icon(Icons.face),

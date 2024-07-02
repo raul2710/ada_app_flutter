@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 
+import 'view/first_steps_screen.dart';
 import 'view/login_screen.dart';
 import 'view/subscribe_screen.dart';
 
@@ -47,11 +48,11 @@ class MainApp extends StatelessWidget {
       //
       //ROTAS DE NAVEGAÇÃO
       //
-      initialRoute: 'screenLogin',
+      initialRoute: '/login',
       routes: {
         '/login' :(context) => LoginScreen(),
         '/subscribe' :(context) => SubscribeScreen(),
-        '/first-steps' :(context) => SubscribeScreen(),
+        '/first-steps' :(context) => FirstStepsScreen(),
         // 'screenListTravels' :(context) => ScreenListTravels(),
         // 'screenModifyItem' :(context) => ScreenModifyItem(),
         // 'screenAddTrip' :(context) => ScreenAddTrip(),
