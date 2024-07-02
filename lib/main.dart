@@ -1,6 +1,9 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 
+import 'view/login_screen.dart';
+import 'view/subscribe_screen.dart';
+
 // void main() {
 //   runApp(const MainApp());
 // }
@@ -25,7 +28,7 @@ void main()
   runApp(
     DevicePreview(
       enabled: true,
-      builder: (context) => MainApp()
+      builder: (context) => const MainApp()
       ),
   );
 }
@@ -46,8 +49,9 @@ class MainApp extends StatelessWidget {
       //
       initialRoute: 'screenLogin',
       routes: {
-        // 'screenLogin' :(context) => ScreenLogin(listUsers:listUsers),
-        // 'screenSubscribe' :(context) => ScreenSubscribe(),
+        '/login' :(context) => LoginScreen(),
+        '/subscribe' :(context) => SubscribeScreen(),
+        '/first-steps' :(context) => SubscribeScreen(),
         // 'screenListTravels' :(context) => ScreenListTravels(),
         // 'screenModifyItem' :(context) => ScreenModifyItem(),
         // 'screenAddTrip' :(context) => ScreenAddTrip(),
