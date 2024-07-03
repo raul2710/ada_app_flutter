@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'view/first_steps_screen.dart';
 import 'view/login_screen.dart';
+import 'view/main_screen.dart';
 import 'view/subscribe_screen.dart';
 
 // void main() {
@@ -50,10 +51,10 @@ class MainApp extends StatelessWidget {
       //
       initialRoute: '/login',
       routes: {
-        '/login' :(context) => LoginScreen(),
-        '/subscribe' :(context) => SubscribeScreen(),
-        '/first-steps' :(context) => FirstStepsScreen(),
-        // 'screenListTravels' :(context) => ScreenListTravels(),
+        '/login' :(context) => const LoginScreen(),
+        '/subscribe' :(context) => const SubscribeScreen(),
+        '/first-steps' :(context) => const FirstStepsScreen(),
+        '/main' :(context) => const MainScreen(),
         // 'screenModifyItem' :(context) => ScreenModifyItem(),
         // 'screenAddTrip' :(context) => ScreenAddTrip(),
         // 'screenViewTrip' :(context) => ScreenViewTrip(),

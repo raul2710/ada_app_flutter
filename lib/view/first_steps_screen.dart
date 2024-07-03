@@ -13,7 +13,7 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
    @override
    Widget build(BuildContext context) {
        return Scaffold(
-           appBar: AppBar(toolbarOpacity: 1,),
+          //  appBar: AppBar(toolbarOpacity: 1,),
            body: Container(
             alignment: Alignment.center,
               color: const Color(0xFF3F80EA),
@@ -29,7 +29,7 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
 
                   OutlinedButton.icon(
                     onPressed: ()=>{
-                      Navigator.pushNamed(context, '/mainPage')
+                      Navigator.pushNamed(context, '/main')
                     },
                     label: const Text('Login with Google'),
                     // child: Text('Login with Google'),
@@ -40,7 +40,7 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
                   const SizedBox(height: 15,),
                   OutlinedButton.icon(
                     onPressed: ()=>{
-                      Navigator.pushNamed(context, '/mainPage')
+                      Navigator.pushNamed(context, '/main')
                     }, 
                     label: const Text('Login with Google'),
                     // child: Text('Login with Google'),
@@ -51,7 +51,7 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
                   const SizedBox(height: 15,),
                   OutlinedButton.icon(
                     onPressed: ()=>{
-                      Navigator.pushNamed(context, '/mainPage')
+                      Navigator.pushNamed(context, '/main')
                     }, 
                     label: const Text('Login with Google'),
                     // child: Text('Login with Google'),
