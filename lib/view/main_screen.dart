@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -21,7 +22,98 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
-
+          children: [
+            Container(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                children: [
+                          const Row(
+                      children: [
+                        Text('Preparation'),
+                        Icon(Icons.arrow_forward),
+                      ]
+                    ),
+                    CarouselSlider(
+                    options: CarouselOptions(height: 100.0),
+                    items: ['Introduction', 'Planning', 'Simulate'].map((i) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                            // decoration: const BoxDecoration(
+                            //   color: Colors.amber
+                            // ),
+                            child:RawMaterialButton(
+                              onPressed: () {},
+                              elevation: 2.0,
+                              
+                              fillColor: Colors.white,
+                              child: Icon(
+                                Icons.pause,
+                                size: 35.0,
+                              ),
+                              padding: EdgeInsets.all(15.0),
+                              shape: CircleBorder(),
+                            )
+                          );
+                        },
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 10,),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 100,
+              color: const Color(0xFF3F80EA),
+              child: const Text('Shelter'),
+            ),
+            const SizedBox(height: 10,),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 100,
+              padding: const EdgeInsets.all(5),
+              color: const Color(0xFF3F80EA),
+              child: const Text('Emergency Kit'),
+            ),
+            const SizedBox(height: 10,),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              color: const Color(0xFF3F80EA),
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                children: [
+                  const Row(
+                    children: [
+                      Text('Shelter'),
+                      Icon(Icons.arrow_forward),
+                    ]
+                  ),
+                  const SizedBox(height: 10,),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      'lib/images/image_maps.jpg',
+                      width: double.infinity,
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
+                  const Text(
+                    'Look for shelters nearby and define escape routes',
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(height: 10,),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 100,
+              child: const Text('Update news'),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: NavigationBar(
