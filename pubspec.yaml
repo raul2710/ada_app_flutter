@@ -9,6 +9,11 @@ environment:
 dependencies:
   carousel_slider: ^4.2.1
   device_preview: ^1.2.0
+  google_maps_flutter: ^2.3.0
+  firebase_core: ^3.2.0
+  firebase_messaging: ^15.0.3
+  cloud_firestore: ^5.1.0
+  universal_platform: ^1.0.0
   flutter:
     sdk: flutter
 
