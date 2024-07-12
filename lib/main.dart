@@ -1,6 +1,8 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'firebase_options.dart';
 import 'view/first_steps_screen.dart';
 import 'view/login_screen.dart';
 import 'view/main_screen.dart';
@@ -25,8 +27,22 @@ import 'view/subscribe_screen.dart';
 //   }
 // }
 
-void main()
-{
+// import 'package:firebase_core/firebase_core.dart';
+// import 'firebase_options.dart';
+
+// // ...
+
+// await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+// );
+const clientId = '830251467767-otheok9k6qetdqnh9m7i08jjplsl92nm.apps.googleusercontent.com';
+
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
   runApp(
     DevicePreview(
       enabled: true,
@@ -38,6 +54,7 @@ void main()
 //
 // MainApp
 //
+
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
