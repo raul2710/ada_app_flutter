@@ -8,13 +8,11 @@ class LoginController {
   //
   // CRIAR CONTA de um usuário no serviço Firebase Authentication
   //
-  criarConta(context, name, lastName, age, work, phone, email, senha) {
-    FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
-      email: email,
-      password: senha,
-    )
-        .then(
+  createUserWithEmailAndPassword(context, firstName, lastName, birthDate, emailAddress, password) {
+    FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: emailAddress,
+      password: password,
+    ).then(
       (resultado) {
         //Usuário criado com sucesso!
 
@@ -22,11 +20,6 @@ class LoginController {
         FirebaseFirestore.instance.collection("users").add(
           {
             "uid": resultado.user!.uid,
-            "name": name,
-            "lastName": lastName,
-            "age": age,
-            "work": work,
-            "phone": phone,
           },
         );
 
@@ -51,27 +44,47 @@ class LoginController {
   //
   // LOGIN de usuário a partir do provedor Email/Senha
   //
-  login(context, email, senha) {
-    FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: senha)
-        .then((resultado) {
-          
-      // sucesso(context, 'Usuário autenticado com sucesso!');
-      Navigator.pushNamed(context, 'main');
-
-    }).catchError((e) {
-      switch (e.code) {
-        case 'invalid-email':
-          // erro(context, 'O formato do e-mail é inválido.');
-        case 'invalid-credential':
-          // erro(context, 'Usuário e/ou senha inválida.');
-        default:
-          // erro(context, 'ERRO: ${e.code.toString()}');
+  signInWithEmailAndPassword(context, emailAddress, password) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailAddress,
+        password: password
+      ).then((result) {
+          // sucesso(context, 'Usuário autenticado com sucesso!');
+          Navigator.pushNamed(context, 'main');
+        }
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
       }
-    });
+    }
+    // FirebaseAuth.instance
+    //     .signInWithEmailAndPassword(
+    //       email: emailAddress, 
+    //       password: password
+    //     )
+    //     .then((resultado) {
+          
+    //   // sucesso(context, 'Usuário autenticado com sucesso!');
+    //   // Navigator.pushNamed(context, 'main');
+
+    // }).catchError((e) {
+    //   print(e);
+    //   switch (e.code) {
+    //     case 'invalid-email':
+    //       // erro(context, 'O formato do e-mail é inválido.');
+    //     case 'invalid-credential':
+    //       // erro(context, 'Usuário e/ou senha inválida.');
+    //     default:
+    //       // erro(context, 'ERRO: ${e.code.toString()}');
+    //   }
+    // });
   }
 
-  esqueceuSenha(context, email) {
+  sendPasswordResetEmail(context, email) {
     if (email.isNotEmpty) {
       FirebaseAuth.instance.sendPasswordResetEmail(
         email: email,
@@ -83,14 +96,14 @@ class LoginController {
   }
 
   //
-  // Efetuar logou do usuário
+  // Sign out logged user
   //
-  logout() {
-    FirebaseAuth.instance.signOut();
+  signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 
   //
-  // Retornar o UID (User Identifier) do usuário que está logado no App
+  // Return the UID (User Identifier) of user logged
   //
   idUsuarioLogado() {
     return FirebaseAuth.instance.currentUser!.uid;

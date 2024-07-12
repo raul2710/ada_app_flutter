@@ -1,4 +1,3 @@
-import 'package:ada_app_flutter/view/verify_screen.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 import 'view/first_steps_screen.dart';
 import 'view/login_screen.dart';
+import 'view/login_with_email_and_password_screen.dart';
 import 'view/main_screen.dart';
 import 'view/subscribe_screen.dart';
+import 'view/verify_screen.dart';
 
 // void main() {
 //   runApp(const MainApp());
@@ -74,7 +75,7 @@ class MainApp extends StatelessWidget {
         '/first-steps' :(context) => const FirstStepsScreen(),
         '/main' :(context) => const MainScreen(),
         '/verify' :(context) => const VerifyScreen(),
-        // 'screenModifyItem' :(context) => ScreenModifyItem(),
+        '/loginwithemailandpassword' :(context) => const LoginWithEmailAndPasswordScreen(),
         // 'screenAddTrip' :(context) => ScreenAddTrip(),
         // 'screenViewTrip' :(context) => ScreenViewTrip(),
         // 'screenSearchTrip' :(context) => ScreenSearchTrip(),

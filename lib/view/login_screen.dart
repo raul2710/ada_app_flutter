@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../controller/login_google_controller.dart';
+
 // import '../controller/login_google_controller.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,6 +15,38 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+// void validateEmail(){
+//     final bool isValidate = EmailValidator.validate(txtEmail.text.trim());
+
+//     if(isValidate){
+//       loginLoad();
+//     }else{
+//       openDialogEmail();
+//     }
+//   }
+
+//   void loginLoad(){  
+//     if (formKey.currentState!.validate()) {
+//       if(listUsers.any((u) => u.email == txtEmail.text && u.password == txtPassword.text)){
+//         User user;
+//         user = listUsers.singleWhere((u) => 
+//           u.email == txtEmail.text && 
+//           u.password == txtPassword.text
+//         );
+//         setState(() {
+//           Navigator.pushNamed(
+//             context, 
+//             'screenListCategory', 
+//             arguments: user.listTripCategory,
+//           );
+//         });
+//       } else openDialog();
+//     }
+//   }
+
+
+
 // ValueNotifier userCredential = ValueNotifier('');
 
 //   @override
@@ -116,8 +150,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Button: Login with Google
                   // 
                   OutlinedButton.icon(
-                    onPressed: () async {
-                      await signInWithGoogle();
+                    onPressed: () {
+                      signInWithGoogle();
+
+                      
                     }, 
                     label: const Text('Login with Google'),
                     // child: Text('Login with Google'),
@@ -134,10 +170,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.pushNamed(context, '/subscribe')
                     }, 
                     label: const Text('Create an account with another email'),
-                    // child: Text('Login with Google'),
                     style: OutlinedButton.styleFrom(fixedSize: const Size.fromWidth(300.0)),
                     iconAlignment: IconAlignment.end,
                   ),
+                  const SizedBox(height: 15,),
                   // 
                   // Button: Continue without login
                   // 
@@ -149,6 +185,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     // child: Text('Login with Google'),
                     style: OutlinedButton.styleFrom(fixedSize: const Size.fromWidth(300.0)),
                     iconAlignment: IconAlignment.end,
+                  ),
+                  const SizedBox(height: 15,),
+                  // 
+                  // Button: Continue without login
+                  // 
+                  OutlinedButton.icon(
+                    onPressed: ()=>{
+                      Navigator.pushNamed(context, '/loginwithemailandpassword')
+                    }, 
+                    label: const Text('Login with Email and Password'),
+                    // child: Text('Login with Google'),
+                    style: OutlinedButton.styleFrom(fixedSize: const Size.fromWidth(300.0)),
+                    iconAlignment: IconAlignment.end,
                   )
                 ],
               ),
@@ -156,25 +205,4 @@ class _LoginScreenState extends State<LoginScreen> {
            ),
        );
   }
-}
-
-Future<UserCredential> signInWithGoogle() async {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  // Trigger the authentication flow
-  final GoogleSignInAccount? googleUser = await GoogleSignIn(
-    // const String.fromEnvironment('GOOGLE_CLIENT_ID'),
-    clientId: "830251467767-otheok9k6qetdqnh9m7i08jjplsl92nm.apps.googleusercontent.com"
-  ).signIn();
-
-  // Obtain the auth details from the request
-  final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-
-  // Create a new credential
-  final credential = GoogleAuthProvider.credential(
-    accessToken: googleAuth?.accessToken,
-    idToken: googleAuth?.idToken,
-  );
-
-  // Once signed in, return the UserCredential
-  return await _auth.signInWithCredential(credential);
 }

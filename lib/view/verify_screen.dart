@@ -18,16 +18,16 @@ class _VerifyScreenState extends State<VerifyScreen> {
               child: Center(
                 child: Column(
                   children: [
-                    Text('data'),
-                    Text('data'),
+                    const Text('data'),
+                    const Text('data'),
                     TextField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Number',
                       ),
                       controller: verification,
                     ),
-                    OutlinedButton(onPressed: (){}, child: Text('data')),
-                    OutlinedButton(onPressed: (){}, child: Text('teste'))
+                    OutlinedButton(onPressed: (){}, child: const Text('data')),
+                    OutlinedButton(onPressed: (){}, child: const Text('teste'))
                   ],
                 ),
               ),
