@@ -1,3 +1,4 @@
+import 'package:ada_app_flutter/view/verify_screen.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +73,7 @@ class MainApp extends StatelessWidget {
         '/subscribe' :(context) => const SubscribeScreen(),
         '/first-steps' :(context) => const FirstStepsScreen(),
         '/main' :(context) => const MainScreen(),
+        '/verify' :(context) => const VerifyScreen(),
         // 'screenModifyItem' :(context) => ScreenModifyItem(),
         // 'screenAddTrip' :(context) => ScreenAddTrip(),
         // 'screenViewTrip' :(context) => ScreenViewTrip(),
