@@ -11,7 +11,8 @@ class Textformfieldstardard extends StatelessWidget {
     this.validatorMessage,
     this.obscureText = false,
     this.keyboardType,
-    this.inputFormatters,
+    this.inputFormatters, 
+    this.onPressedIcon,
   });
 
   final String labelText;
@@ -21,6 +22,7 @@ class Textformfieldstardard extends StatelessWidget {
   final bool obscureText;
   final TextInputType ?keyboardType;
   final List<TextInputFormatter> ?inputFormatters;
+  final VoidCallback ?onPressedIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +31,23 @@ class Textformfieldstardard extends StatelessWidget {
       obscureText: obscureText,
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,
-      validator: (value) {
-        return value!.isEmpty ? validatorMessage : null;
-      },
+
       decoration: InputDecoration(
         labelText: labelText,
         prefixIcon: Icon(prefixIcon),
-        border: const OutlineInputBorder()
+        suffixIcon: IconButton(
+          onPressed: controller.clear,
+          icon: const Icon(Icons.cancel_outlined),
+        ),
+        border: const OutlineInputBorder(),
+        prefixIconColor: const Color(0xFFE88C38),
+        floatingLabelStyle: const TextStyle(color:  Color(0xFFE88C38),),
+        labelStyle: const TextStyle(color:  Color(0xFFE88C38),),
       ),
+
+      validator: (value) {
+        return value!.isEmpty ? validatorMessage : null;
+      },
     );
   }
 }

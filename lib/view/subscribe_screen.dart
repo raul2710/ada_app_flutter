@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-import '../widgets/TextFormFieldStardard.dart';
+import '../widgets/textformfield_stardard.dart';
 
 class SubscribeScreen extends StatefulWidget {
 

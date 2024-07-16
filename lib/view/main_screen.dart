@@ -89,8 +89,31 @@ class _MainScreenState extends State<MainScreen> {
                 width: MediaQuery.of(context).size.width,
                 height: 100,
                 padding: const EdgeInsets.all(5),
-                color: const Color(0xFF3F80EA),
-                child: const Text('Emergency Kit'),
+                color: const Color(0xFFF1B505),
+                child: Column(
+                  children: [
+                    const Row(children: [
+                      Text('Emergency Kit'),
+                      Icon(Icons.arrow_forward),
+                    ]),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset(
+                        'lib/images/image_maps.jpg',
+                        width: double.infinity,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      'Use Gemini IA to personalize your emergency kit according to the emergency situation',
+                    )
+                  ],
+                ),
               ),
             ),
             const SizedBox(
@@ -130,9 +153,6 @@ class _MainScreenState extends State<MainScreen> {
                   ],
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
             ),
             Container(
               width: MediaQuery.of(context).size.width,

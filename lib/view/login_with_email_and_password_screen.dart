@@ -1,7 +1,9 @@
 import 'package:ada_app_flutter/controller/login_controller.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/TextFormFieldStardard.dart';
+import '../widgets/FlatButtonStandard.dart';
+import '../widgets/OutlinedButtonStandard.dart';
+import '../widgets/textformfield_stardard.dart';
 
 class LoginWithEmailAndPasswordScreen extends StatefulWidget {
 
@@ -19,29 +21,37 @@ class _LoginWithEmailAndPasswordScreenState extends State<LoginWithEmailAndPassw
   var email = TextEditingController();
   var password = TextEditingController();
 
-    void loginLoad(){  
-      if (formKey.currentState!.validate());
+  void loginLoad(){  
+    if(formKey.currentState!.validate()){
+      LoginController().signInWithEmailAndPassword(
+        context,
+        email.toString(),
+        password.toString()
+      );
     }
+  }
 
    @override
    Widget build(BuildContext context) {
        return Scaffold(
-           appBar: AppBar(title: const Text(''),),
+          //  appBar: AppBar(title: const Text(''),),
            body: Padding(
              padding: const EdgeInsets.all(10.0),
              child: Column(
                mainAxisAlignment: MainAxisAlignment.center,
                children: [
                  const Text(
-                   'Login',
+                   'Login in with your email adress',
                    textAlign: TextAlign.left,
                    style: TextStyle(
-                     fontSize: 30,
-                      fontWeight: FontWeight.bold
+                     fontSize: 20,
+                      fontWeight: FontWeight.w300
                    ),
                  ),
-                 const SizedBox(height: 15,),
-                 Form(
+                 const SizedBox(height: 30,),
+                 Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 60),
+                  child: Form(
                    key: formKey,
                    child: Column(
                      children: [
@@ -55,7 +65,7 @@ class _LoginWithEmailAndPasswordScreenState extends State<LoginWithEmailAndPassw
                         prefixIcon: Icons.email,
                       ),
 
-                      const SizedBox(height: 15,),
+                      const SizedBox(height: 25,),
 
                       // 
                       // Input Password
@@ -66,43 +76,43 @@ class _LoginWithEmailAndPasswordScreenState extends State<LoginWithEmailAndPassw
                         validatorMessage: 'Type your password', 
                         prefixIcon: Icons.password,
                         obscureText: true,
-                      )
-                     ],
-                   ),
-                 ),
-                 const SizedBox(height: 15,),
+                      ),
+                     
+                 const SizedBox(height: 5,),
                  
                  Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: (){}, 
-                    child: const Text('Forget password?')
+                    onPressed: (){},
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.all(0),
+                      foregroundColor: const Color(0xFF000000)
+                    ), 
+                    child: const Text('Forget password?'),
                   ),
                  ),
                  
+                 const SizedBox(height: 40,),
                  Row(
                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                    children: [
-                     OutlinedButton(
-                       onPressed: (){
-                        Navigator.pop(context);
-                       }, 
-                       child: const Text('Back')
+                     OutlinedButtonStandard(
+                      text: "Back",
+                      onPressed: (){
+                      Navigator.pop(context);
+                      }, 
                      ),
-                     OutlinedButton(
-                        onPressed: (){
-                          if(formKey.currentState!.validate()){
-                            LoginController().signInWithEmailAndPassword(
-                              context,
-                              email.toString(),
-                              password.toString()
-                            );
-                          };
-                        }, 
-                       child: const Text('Continue')
+                     TextButtonStandard(
+                        text: "Login", 
+                        onPressed: loginLoad,
                      )
                    ],
-                 )
+                 ),
+                  ],
+                   ),
+                 ),
+                )
+                 
                ],
              )
            )
