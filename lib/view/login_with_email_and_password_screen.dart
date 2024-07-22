@@ -98,9 +98,9 @@ class _LoginWithEmailAndPasswordScreenState extends State<LoginWithEmailAndPassw
                    children: [
                      OutlinedButtonStandard(
                       text: "Back",
-                      onPressed: (){
-                      Navigator.pop(context);
-                      }, 
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                      ),
                      TextButtonStandard(
                         text: "Login", 

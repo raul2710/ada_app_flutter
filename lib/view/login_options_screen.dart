@@ -6,15 +6,15 @@ import '../controller/login_google_controller.dart';
 
 // import '../controller/login_google_controller.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginOptions extends StatefulWidget {
 
-  const LoginScreen({ super.key });
+  const LoginOptions({ super.key });
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginOptions> createState() => _LoginOptionsState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginOptionsState extends State<LoginOptions> {
 
 // void validateEmail(){
 //     final bool isValidate = EmailValidator.validate(txtEmail.text.trim());
@@ -112,6 +112,20 @@ class _LoginScreenState extends State<LoginScreen> {
 //             }));
    @override
    Widget build(BuildContext context) {
+
+    ButtonStyle buttonStyle = OutlinedButton.styleFrom(
+      fixedSize: const Size.fromWidth(300.0),
+      foregroundColor: const Color(0xFF000000),
+      side: const BorderSide(color: Color(0xFF000000),)
+    );
+
+    ButtonStyle buttonStyleLoginGoogle = OutlinedButton.styleFrom(
+      fixedSize: const Size.fromWidth(300.0),
+      foregroundColor: const Color(0xFFFFFFFF),
+      backgroundColor: const Color(0xFFE88C38),
+      side: const BorderSide(color: Color(0xFFE88C38),)
+    );
+
        return Scaffold(
           //  appBar: AppBar(title: const Text('Login Test'),),
            body: Container(
@@ -125,7 +139,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   // 
                   // Icon
                   // 
-                  const Icon(Icons.person),
+                  Image.asset(
+                    'lib/images/LoginIcon.png'
+                  ),
                   // 
                   // Title
                   // 
@@ -158,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     label: const Text('Login with Google'),
                     // child: Text('Login with Google'),
                     icon: const Icon(Icons.face),
-                    style: OutlinedButton.styleFrom(fixedSize: const Size.fromWidth(300.0)),
+                    style: buttonStyleLoginGoogle,
                     iconAlignment: IconAlignment.end,
                   ),
                   const SizedBox(height: 15,),
@@ -170,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.pushNamed(context, '/subscribe')
                     }, 
                     label: const Text('Create an account with another email'),
-                    style: OutlinedButton.styleFrom(fixedSize: const Size.fromWidth(300.0)),
+                    style: buttonStyle,
                     iconAlignment: IconAlignment.end,
                   ),
                   const SizedBox(height: 15,),
@@ -179,11 +195,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   // 
                   OutlinedButton.icon(
                     onPressed: ()=>{
-                      Navigator.pushNamed(context, '/main')
+                      Navigator.pushNamed(context, '/first-steps')
                     }, 
                     label: const Text('Continue without login'),
                     // child: Text('Login with Google'),
-                    style: OutlinedButton.styleFrom(fixedSize: const Size.fromWidth(300.0)),
+                    style: buttonStyle,
                     iconAlignment: IconAlignment.end,
                   ),
                   const SizedBox(height: 15,),
@@ -196,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     }, 
                     label: const Text('Login with Email and Password'),
                     // child: Text('Login with Google'),
-                    style: OutlinedButton.styleFrom(fixedSize: const Size.fromWidth(300.0)),
+                    style: buttonStyle,
                     iconAlignment: IconAlignment.end,
                   )
                 ],

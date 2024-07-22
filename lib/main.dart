@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 import 'firebase_options.dart';
 import 'view/first_steps_screen.dart';
-import 'view/login_screen.dart';
+import 'view/login_options_screen.dart';
 import 'view/login_with_email_and_password_screen.dart';
 import 'view/main_screen.dart';
+import 'view/preparation_screen.dart';
 import 'view/subscribe_screen.dart';
 import 'view/verify_screen.dart';
 
@@ -70,7 +71,8 @@ class MainApp extends StatelessWidget {
       //
       initialRoute: '/login',
       routes: {
-        '/login' :(context) => const LoginScreen(),
+        '/login' :(context) => const LoginOptions(),
+        '/preparation' :(context) => const Preparation(),
         '/subscribe' :(context) => const SubscribeScreen(),
         '/first-steps' :(context) => const FirstStepsScreen(),
         '/main' :(context) => const MainScreen(),

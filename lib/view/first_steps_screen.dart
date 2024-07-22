@@ -9,10 +9,21 @@ class FirstStepsScreen extends StatefulWidget {
 }
 
 class _FirstStepsScreenState extends State<FirstStepsScreen> {
+  @override
+  Widget build(BuildContext context) {
 
-   @override
-   Widget build(BuildContext context) {
-       return Scaffold(
+  const txtTitleStyle = TextStyle(
+    color: Color(0xFFFFFFFF),
+    fontSize: 36
+  );
+
+  ButtonStyle buttonStyle = OutlinedButton.styleFrom(
+    fixedSize: const Size.fromWidth(300.0),
+    foregroundColor: const Color(0xFFFFFFFF),
+    side: const BorderSide(color: Color(0xFFFFFFFF),)
+  );
+
+  return Scaffold(
           //  appBar: AppBar(toolbarOpacity: 1,),
            body: Container(
             alignment: Alignment.center,
@@ -22,20 +33,40 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
                child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('A.D.A'),
-                  const Text('Alert Disaster Assist'),
 
-                  const Icon(Icons.ac_unit_sharp),
-
+                  const Text(
+                    'A.D.A',
+                    style: txtTitleStyle,          
+                  ),
+                  const Text(
+                    'Alert Disaster Assist',
+                    style: txtTitleStyle, 
+                  ),
+                  
+                  Image.asset(
+                    'lib/images/Icon.png'
+                  ),
+                  const SizedBox(height: 15,),
                   OutlinedButton.icon(
                     onPressed: ()=>{
                       Navigator.pushNamed(context, '/main')
                     },
+                    label: const Text('Select your location'),
+                    // child: Text('Login with Google'),
+                    icon: const Icon(Icons.location_on_outlined), 
+                    style: buttonStyle,
+                    iconAlignment: IconAlignment.start,
+                  ),
+                  const SizedBox(height: 15,),
+                  OutlinedButton.icon(
+                    onPressed: ()=>{
+                      Navigator.pushNamed(context, '/main')
+                    }, 
                     label: const Text('Login with Google'),
                     // child: Text('Login with Google'),
-                    icon: const Icon(Icons.face),
-                    style: OutlinedButton.styleFrom(fixedSize: const Size.fromWidth(300.0)),
-                    iconAlignment: IconAlignment.end,
+                    //icon: const Icon(Icons.location_on_outlined),
+                    style: buttonStyle,
+                    //iconAlignment: IconAlignment.start,
                   ),
                   const SizedBox(height: 15,),
                   OutlinedButton.icon(
@@ -45,19 +76,7 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
                     label: const Text('Login with Google'),
                     // child: Text('Login with Google'),
                     icon: const Icon(Icons.face),
-                    style: OutlinedButton.styleFrom(fixedSize: const Size.fromWidth(300.0)),
-                    iconAlignment: IconAlignment.end,
-                  ),
-                  const SizedBox(height: 15,),
-                  OutlinedButton.icon(
-                    onPressed: ()=>{
-                      Navigator.pushNamed(context, '/main')
-                    }, 
-                    label: const Text('Login with Google'),
-                    // child: Text('Login with Google'),
-                    icon: const Icon(Icons.face),
-                    style: OutlinedButton.styleFrom(fixedSize: const Size.fromWidth(300.0)),
-                    iconAlignment: IconAlignment.end,
+                    style: buttonStyle,
                   ),
                   const SizedBox(height: 15,),
                 ],

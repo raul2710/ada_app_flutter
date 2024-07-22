@@ -20,6 +20,13 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Welcome to ADA'),
+        automaticallyImplyLeading: false,
+        foregroundColor: const Color(0xFFFFFFFF),
+        backgroundColor: const Color(0xFFE88C38),
+        actions: [
+          IconButton(onPressed: (){}, icon: const Icon(Icons.notifications_outlined)),
+          IconButton(onPressed: (){}, icon: const Icon(Icons.settings_outlined))
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -32,38 +39,71 @@ class _MainScreenState extends State<MainScreen> {
                     Text('Preparation'),
                     Icon(Icons.arrow_forward),
                   ]),
-                  CarouselSlider(
-                    options: CarouselOptions(height: 100.0),
-                    items: ['Introduction', 'Planning', 'Simulate'].map((i) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                              width: MediaQuery.of(context).size.width,
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
-                              // decoration: const BoxDecoration(
-                              //   color: Colors.amber
-                              // ),
-                              child: RawMaterialButton(
-                                onPressed: () {},
-                                elevation: 2.0,
-                                fillColor: Colors.white,
-                                child: Icon(
-                                  Icons.pause,
-                                  size: 35.0,
-                                ),
-                                padding: EdgeInsets.all(15.0),
-                                shape: CircleBorder(),
-                              ));
-                        },
-                      );
-                    }).toList(),
-                  ),
+                  // CarouselSlider(
+                  //   options: CarouselOptions(height: 100.0),
+                  //   items: ['Introduction', 'Planning', 'Simulate'].map((i) {
+                  //     return Builder(
+                  //       builder: (BuildContext context) {
+                  //         return Container(
+                  //             width: MediaQuery.of(context).size.width,
+                  //             margin:
+                  //                 const EdgeInsets.symmetric(horizontal: 5.0),
+                  //             // decoration: const BoxDecoration(
+                  //             //   color: Colors.amber
+                  //             // ),
+                  //             child: Column(
+                  //               children: [
+                  //                 ClipRRect(
+                  //                   borderRadius: BorderRadius.circular(300.0),
+                  //                   child: Image.asset('lib/images/introduction.png'),
+                  //                 ),
+                  //                 const Text('Instroduction'),
+                  //               ],
+                  //             )
+                  //           );
+                  //       },
+                  //     );
+                  //   }).toList(),
+                  // ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            ClipRRect(
+                              // borderRadius: BorderRadius.circular(300.0),
+                              child: Image.asset('lib/images/introduction.png'), 
+                            ),
+                            const Text('Introduction'),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            ClipRRect(
+                              // borderRadius: BorderRadius.circular(300.0),
+                              child: Image.asset('lib/images/planning.png'),
+                            ),
+                            const Text('Planning'),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            ClipRRect(
+                              // borderRadius: BorderRadius.circular(300.0),
+                              child: Image.asset('lib/images/simulate.png'),
+                            ),
+                            const Text('Simulate'),
+                          ],
+                        ),
+                      ],
+                    )
+                  )
                 ],
               ),
-            ),
-            const SizedBox(
-              height: 10,
             ),
             GestureDetector(
               onTap: () => Navigator.push(
@@ -77,9 +117,6 @@ class _MainScreenState extends State<MainScreen> {
                 child: const Text('Quiz'),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
             GestureDetector(
               onTap: () => Navigator.push(
                 context,
@@ -87,7 +124,6 @@ class _MainScreenState extends State<MainScreen> {
               ),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: 100,
                 padding: const EdgeInsets.all(5),
                 color: const Color(0xFFF1B505),
                 child: Column(
@@ -102,12 +138,11 @@ class _MainScreenState extends State<MainScreen> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Image.asset(
-                        'lib/images/image_maps.jpg',
-                        width: double.infinity,
+                        'lib/images/SurviveKit.png',
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height:  10,
                     ),
                     const Text(
                       'Use Gemini IA to personalize your emergency kit according to the emergency situation',
@@ -116,13 +151,10 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
             GestureDetector(
               onTap: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ShelterMapScreen()),
+                MaterialPageRoute(builder: (context) => const ShelterMapScreen()),
               ),
               child: Container(
                 width: MediaQuery.of(context).size.width,
@@ -168,24 +200,21 @@ class _MainScreenState extends State<MainScreen> {
             currentPageIndex = index;
           });
         },
-        indicatorColor: Colors.amber,
+        backgroundColor: const Color(0xFFE88C38),
+        indicatorColor:const Color(0xFF3F80EA),
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
           NavigationDestination(
-            selectedIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
+            icon: Icon(Icons.menu, color: Color(0xFFFFFFFF),),
+            label: 'Main Menu',
           ),
           NavigationDestination(
-            icon: Badge(child: Icon(Icons.notifications_sharp)),
-            label: 'Notifications',
+            icon: Icon(Icons.info, color: Color(0xFFFFFFFF),),
+            label: 'Emergency Mode',
           ),
           NavigationDestination(
-            icon: Badge(
-              label: Text('2'),
-              child: Icon(Icons.messenger_sharp),
-            ),
-            label: 'Messages',
+            icon: Icon(Icons.person, color: Color(0xFFFFFFFF)),
+            label: 'Contacts',
           ),
         ],
       ),

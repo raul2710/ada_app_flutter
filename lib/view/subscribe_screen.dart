@@ -1,3 +1,5 @@
+import 'package:ada_app_flutter/widgets/FlatButtonStandard.dart';
+import 'package:ada_app_flutter/widgets/OutlinedButtonStandard.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -21,11 +23,10 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
    @override
    Widget build(BuildContext context) {
        return Scaffold(
-           appBar: AppBar(title: const Text(''),),
            body: Container(
             alignment: Alignment.center,
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(70.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -46,7 +47,6 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                     key: formKey,
                     child: Column(
                       children: [
-
                         // 
                         // Input first name
                         // 
@@ -97,24 +97,16 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      OutlinedButton(
-                        onPressed: (){
-                          Navigator.pop(context);
-                        }, 
-                        child: const Text('Back')
-                      ),
-                      OutlinedButton(
-                        onPressed: (){
-                          if(formKey.currentState!.validate()){
+                      TextButtonStandard(text: 'Back', onPressed: (){}),
+                      OutlinedButtonStandard(text: 'Follow', onPressed: (){
+                        if(formKey.currentState!.validate()){
                             // LoginController().createUserWithEmailAndPassword(
                             //   context,
                             //   email.toString(),
                             //   password.toString()
                             // );
-                          };
-                        }, 
-                        child: const Text('Continue')
-                      )
+                          }
+                      }),
                     ],
                   )
                 ],
