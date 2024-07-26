@@ -1,4 +1,4 @@
-import 'package:ada_app_flutter/widgets/FlatButtonStandard.dart';
+import 'package:ada_app_flutter/widgets/TextButtonStandard.dart';
 import 'package:ada_app_flutter/widgets/OutlinedButtonStandard.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -97,9 +97,12 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextButtonStandard(text: 'Back', onPressed: (){}),
+                      TextButtonStandard(text: 'Back', onPressed: (){
+                        Navigator.pop(context);
+                      }),
                       OutlinedButtonStandard(text: 'Follow', onPressed: (){
                         if(formKey.currentState!.validate()){
+
                             // LoginController().createUserWithEmailAndPassword(
                             //   context,
                             //   email.toString(),

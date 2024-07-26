@@ -1,6 +1,9 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/ClickableCardHome.dart';
+import '../widgets/NoticeCard.dart';
+import '../widgets/PreparationCardHome.dart';
+import '../widgets/TitleCardHome.dart';
 import 'kit_screen.dart';
 import 'quiz_screen.dart';
 import 'shelter_map_screen.dart';
@@ -15,8 +18,18 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int currentPageIndex = 0;
 
+  Color emergencyKitColor = const Color(0xFFF1B505);
+  Color mapsColor = const Color(0xFF3F80EA);
+
+  Color navBarBackground = const Color(0xFFE88C38);
+  Color navBarIndicator = const Color(0xFF3F80EA);
+
+
   @override
   Widget build(BuildContext context) {
+    
+    const navBarIcon = Color(0xFFFFFFFF);
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Welcome to ADA'),
@@ -31,165 +44,62 @@ class _MainScreenState extends State<MainScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                children: [
-                  const Row(children: [
-                    Text('Preparation'),
-                    Icon(Icons.arrow_forward),
-                  ]),
-                  // CarouselSlider(
-                  //   options: CarouselOptions(height: 100.0),
-                  //   items: ['Introduction', 'Planning', 'Simulate'].map((i) {
-                  //     return Builder(
-                  //       builder: (BuildContext context) {
-                  //         return Container(
-                  //             width: MediaQuery.of(context).size.width,
-                  //             margin:
-                  //                 const EdgeInsets.symmetric(horizontal: 5.0),
-                  //             // decoration: const BoxDecoration(
-                  //             //   color: Colors.amber
-                  //             // ),
-                  //             child: Column(
-                  //               children: [
-                  //                 ClipRRect(
-                  //                   borderRadius: BorderRadius.circular(300.0),
-                  //                   child: Image.asset('lib/images/introduction.png'),
-                  //                 ),
-                  //                 const Text('Instroduction'),
-                  //               ],
-                  //             )
-                  //           );
-                  //       },
-                  //     );
-                  //   }).toList(),
-                  // ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 5.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          children: [
-                            ClipRRect(
-                              // borderRadius: BorderRadius.circular(300.0),
-                              child: Image.asset('lib/images/introduction.png'), 
-                            ),
-                            const Text('Introduction'),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            ClipRRect(
-                              // borderRadius: BorderRadius.circular(300.0),
-                              child: Image.asset('lib/images/planning.png'),
-                            ),
-                            const Text('Planning'),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            ClipRRect(
-                              // borderRadius: BorderRadius.circular(300.0),
-                              child: Image.asset('lib/images/simulate.png'),
-                            ),
-                            const Text('Simulate'),
-                          ],
-                        ),
-                      ],
-                    )
-                  )
-                ],
-              ),
+            
+            PreparationCardHome(
+              onTapPreparation: (){Navigator.pushNamed(context, '/preparation');},
+
+              onTapIntroduction: (){print('Test tap Emergency Introduction');},
+              onTapPlanning: (){print('Test tap Emergency Planning');},
+              onTapSimulate: (){print('Test tap Emergency Simulate');},
             ),
-            GestureDetector(
+
+            ClickableCardHome(
+              color: mapsColor,
+              titleCard: 'Quiz', 
+              image: 'lib/images/SurviveKit.png', 
+              description: 'Use Gemini IA to personalize your emergency kit according to the emergency situation',
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => QuizScreen()),
               ),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 100,
-                color: const Color(0xFF3F80EA),
-                child: const Text('Quiz'),
-              ),
             ),
-            GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => KitScreen()),
-              ),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.all(5),
-                color: const Color(0xFFF1B505),
-                child: Column(
-                  children: [
-                    const Row(children: [
-                      Text('Emergency Kit'),
-                      Icon(Icons.arrow_forward),
-                    ]),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        'lib/images/SurviveKit.png',
-                      ),
-                    ),
-                    const SizedBox(
-                      height:  10,
-                    ),
-                    const Text(
-                      'Use Gemini IA to personalize your emergency kit according to the emergency situation',
-                    )
-                  ],
+
+            ClickableCardHome(
+              color: emergencyKitColor,
+              titleCard: 'Emergency Kit', 
+              image: 'lib/images/SurviveKit.png', 
+              description: 'Use Gemini IA to personalize your emergency kit according to the emergency situation',
+              onTap: (){print('Test tap Emergency Kit');},
+            ),
+
+            ClickableCardHome(
+              color: mapsColor,
+              titleCard: 'Shelter', 
+              image: 'lib/images/image_maps.jpg', 
+              description: 'Look for shelters nearby and define escape routes',
+              onTap: (){print('Test tap Map');},
+            ),
+
+            Column(
+              children: [
+                const TitleCardHome(title: 'Updated News'),
+                NoticeCard(
+                  title: 'Earthquake on Japan',
+                  description: 'Cracked street after earthquake .ADA were used to spare alerts to the population to avoid the most affected areas and roads',
+                  image: 'lib/images/ex_notice1.png',
+                  time: 'Today - 23min',
+                  onTap: (){print('Test tap Notice 1');},
                 ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ShelterMapScreen()),
-              ),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                color: const Color(0xFF3F80EA),
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    const Row(children: [
-                      Text('Shelter'),
-                      Icon(Icons.arrow_forward),
-                    ]),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        'lib/images/image_maps.jpg',
-                        width: double.infinity,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text(
-                      'Look for shelters nearby and define escape routes',
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 100,
-              child: const Text('Update news'),
+            
+                NoticeCard(
+                  title: 'Floods in Brazil, in Rio Grande do Sul State ',
+                  description: 'Description duis aute irure dolor in reprehenderit in voluptate velit.',
+                  image: 'lib/images/ex_notice2.png',
+                  time: 'Today - 23min',
+                  onTap: (){print('Test tap Notice 2');},
+                )
+            
+              ],
             ),
           ],
         ),
@@ -200,20 +110,22 @@ class _MainScreenState extends State<MainScreen> {
             currentPageIndex = index;
           });
         },
-        backgroundColor: const Color(0xFFE88C38),
-        indicatorColor:const Color(0xFF3F80EA),
+
+        backgroundColor: navBarBackground,
+        indicatorColor:navBarIndicator,
         selectedIndex: currentPageIndex,
+        
         destinations: const <Widget>[
           NavigationDestination(
-            icon: Icon(Icons.menu, color: Color(0xFFFFFFFF),),
+            icon: Icon(Icons.menu, color: navBarIcon,),
             label: 'Main Menu',
           ),
           NavigationDestination(
-            icon: Icon(Icons.info, color: Color(0xFFFFFFFF),),
+            icon: Icon(Icons.info, color: navBarIcon,),
             label: 'Emergency Mode',
           ),
           NavigationDestination(
-            icon: Icon(Icons.person, color: Color(0xFFFFFFFF)),
+            icon: Icon(Icons.person, color: navBarIcon,),
             label: 'Contacts',
           ),
         ],

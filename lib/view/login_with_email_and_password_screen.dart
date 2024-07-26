@@ -1,7 +1,7 @@
 import 'package:ada_app_flutter/controller/login_controller.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/FlatButtonStandard.dart';
+import '../widgets/TextButtonStandard.dart';
 import '../widgets/OutlinedButtonStandard.dart';
 import '../widgets/textformfield_stardard.dart';
 
