@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../widgets/ClickableCardHome.dart';
 import '../widgets/NoticeCard.dart';
@@ -29,6 +30,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     
     const navBarIcon = Color(0xFFFFFFFF);
+    const navBarIconEmergency = Color(0xFFFF0000);
     
     return Scaffold(
       appBar: AppBar(

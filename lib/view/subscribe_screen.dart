@@ -18,10 +18,22 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
   var lastName = TextEditingController();
   var birthDate = TextEditingController();
   var email = TextEditingController();
+
+  List<bool> isChecked = [false, false, false];
+
+  void clearChecked(){
+    for (var i = 0; i < isChecked.length; i++) {
+      isChecked[i] = false;
+    }
+  }
+  
   var formKey = GlobalKey<FormState>();
+
+  var genderValue;
 
    @override
    Widget build(BuildContext context) {
+
        return Scaffold(
            body: Container(
             alignment: Alignment.center,
@@ -54,7 +66,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                           controller: firstName,
                           labelText: 'First Name',
                           validatorMessage: 'Type your first name', 
-                          prefixIcon: Icons.person,
+                          prefixIcon: Icons.person_outlined,
                         ),
                         
                         const SizedBox(height: 15,),
@@ -65,7 +77,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                           controller: lastName,
                           labelText: 'Last Name',
                           validatorMessage: 'Type your last name', 
-                          prefixIcon: Icons.person,
+                          prefixIcon: Icons.person_outlined,
                         ),
 
                         const SizedBox(height: 15,),
@@ -76,7 +88,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                           controller: birthDate,
                           labelText: 'Birth Date',
                           validatorMessage: 'Type your birth date', 
-                          prefixIcon: Icons.cake,
+                          prefixIcon: Icons.cake_outlined,
                           keyboardType: TextInputType.datetime,
                           inputFormatters: [MaskTextInputFormatter(mask: "##/##/####")],
                         ),
@@ -84,12 +96,101 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                         // 
                         // Input first name
                         // 
-                        Textformfieldstardard(
-                          controller: email,
-                          labelText: 'Email',
-                          validatorMessage: 'Type your email', 
-                          prefixIcon: Icons.email,
+                        const Align(alignment: Alignment.centerLeft, child:  Text('Gender')),
+
+                        Wrap(
+                          children: [
+                            CheckboxListTile(
+                              title: const Text('cisgender'),
+                              value: isChecked[0], 
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  clearChecked();
+                                  isChecked[0] = value!;
+                                });
+                              },
+                            ),
+                            CheckboxListTile(
+
+                              title: const Text('transgender'),
+                              value: isChecked[1], 
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  clearChecked();
+                                  isChecked[1] = value!;
+                                });
+                              },
+                            ),
+                            CheckboxListTile(
+                              title: const Text('non-binary'),
+                              value: isChecked[2], 
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  clearChecked();
+                                  isChecked[2] = value!;
+                                });
+                              },
+                            ),
+                            // Container(
+                            //   padding: EdgeInsets.all(0),
+                            //   child: Row(
+                            //     children: [
+                            //       Checkbox(
+                            //         value: isChecked[0],
+                            //         onChanged: (bool? value) {
+                            //           setState(() {
+                            //             clearChecked();
+                            //             isChecked[0] = value!;
+                            //           });
+                            //         },
+                            //       ),
+                            //       const Text('cisgender'),
+                            //     ],
+                            //   ),
+                            // ),
+                            // Container(
+                            //   padding: EdgeInsets.all(0),
+                            //   child: Row(
+                            //     children: [
+                            //       Checkbox(
+                            //         value: isChecked[1],
+                            //         onChanged: (bool? value) {
+                            //           setState(() {
+                            //             clearChecked();
+                            //             isChecked[1] = value!;
+                            //           });
+                            //         },
+                            //       ),
+                            //       const Text('non-binary'),
+                            //     ],
+                            //   ),
+                            // ),
+                            // Container(
+                            //   padding: EdgeInsets.all(0),
+                            //   child: Row(
+                            //     children: [
+                            //       Checkbox(
+                            //         value: isChecked[2],
+                            //         onChanged: (bool? value) {
+                            //           setState(() {
+                            //             clearChecked();
+                            //             isChecked[2] = value!;
+                            //           });
+                            //         },
+                            //       ),
+                            //       const Text('transgender'),
+                            //     ],
+                            //   ),
+                            // ),
+                          ],
                         ),
+                        // const SizedBox(height: 15,),
+                        // Textformfieldstardard(
+                        //   controller: email,
+                        //   labelText: 'Email',
+                        //   validatorMessage: 'Type your email', 
+                        //   prefixIcon: Icons.email_outlined,
+                        // ),
                         const SizedBox(height: 15,),
                       ],
                     ),
@@ -102,7 +203,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                       }),
                       OutlinedButtonStandard(text: 'Follow', onPressed: (){
                         if(formKey.currentState!.validate()){
-
+                            Navigator.pushNamed(context, '/subscribe-email-password');
                             // LoginController().createUserWithEmailAndPassword(
                             //   context,
                             //   email.toString(),

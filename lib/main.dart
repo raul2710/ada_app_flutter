@@ -8,6 +8,7 @@ import 'view/login_options_screen.dart';
 import 'view/login_with_email_and_password_screen.dart';
 import 'view/main_screen.dart';
 import 'view/preparation_screen.dart';
+import 'view/subscribe_email_password.dart';
 import 'view/subscribe_screen.dart';
 import 'view/verify_screen.dart';
 
@@ -78,6 +79,8 @@ class MainApp extends StatelessWidget {
         '/main' :(context) => const MainScreen(),
         '/verify' :(context) => const VerifyScreen(),
         '/loginwithemailandpassword' :(context) => const LoginWithEmailAndPasswordScreen(),
+        '/subscribe-email-password' :(context) => const SubscribeEmailPasswordScreen(),
+        
         // 'screenAddTrip' :(context) => ScreenAddTrip(),
         // 'screenViewTrip' :(context) => ScreenViewTrip(),
         // 'screenSearchTrip' :(context) => ScreenSearchTrip(),

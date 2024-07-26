@@ -62,7 +62,7 @@ class _LoginWithEmailAndPasswordScreenState extends State<LoginWithEmailAndPassw
                         controller: email,
                         labelText: 'Email',
                         validatorMessage: 'Type your email',
-                        prefixIcon: Icons.email,
+                        prefixIcon: Icons.email_outlined,
                       ),
 
                       const SizedBox(height: 25,),
