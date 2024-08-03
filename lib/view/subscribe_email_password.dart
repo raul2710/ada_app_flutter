@@ -1,8 +1,10 @@
-import 'package:ada_app_flutter/widgets/TextButtonStandard.dart';
-import 'package:ada_app_flutter/widgets/OutlinedButtonStandard.dart';
+import 'package:ada_app_flutter/controller/login_controller.dart';
+import 'package:ada_app_flutter/widgets/text_button_standard.dart';
+import 'package:ada_app_flutter/widgets/outlined_button_standard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
+import '../model/person.dart';
 import '../widgets/textformfield_stardard.dart';
 
 class SubscribeEmailPasswordScreen extends StatefulWidget {
@@ -20,9 +22,11 @@ class _SubscribeEmailPasswordScreenState extends State<SubscribeEmailPasswordScr
   var passwordConfirm = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
-
+  
    @override
    Widget build(BuildContext context) {
+        Person person = ModalRoute.of(context)!.settings.arguments as Person;
+
        return Scaffold(
            body: Container(
             alignment: Alignment.center,
@@ -93,12 +97,16 @@ class _SubscribeEmailPasswordScreenState extends State<SubscribeEmailPasswordScr
                         if(formKey.currentState!.validate()){
                             if(password.text == passwordConfirm.text){
                               print('equals password');
+                              LoginController().createUserWithEmailAndPassword(
+                                context, 
+                                email.text, 
+                                password.text, 
+                                person.firstName,
+                                person.lastName,
+                                Timestamp.now(),
+                                person.gender, 
+                              );
                             }
-                            // LoginController().createUserWithEmailAndPassword(
-                            //   context,
-                            //   email.toString(),
-                            //   password.toString()
-                            // );
                           }
                       }),
                     ],

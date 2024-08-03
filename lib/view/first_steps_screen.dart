@@ -1,23 +1,9 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 
-import '../widgets/TextButtonStandard.dart';
-import 'menuitem.dart';
-
-enum IconLabel {
-  smile('Smile', Icons.sentiment_satisfied_outlined),
-  cloud(
-    'Cloud',
-    Icons.cloud_outlined,
-  ),
-  brush('Brush', Icons.brush_outlined),
-  heart('Heart', Icons.favorite);
-
-  const IconLabel(this.label, this.icon);
-  final String label;
-  final IconData icon;
-}
+import '../model/city.dart';
+import '../model/country.dart';
+import '../services/country_city_service.dart';
+import '../widgets/text_button_standard.dart';
 
 class FirstStepsScreen extends StatefulWidget {
 
@@ -29,13 +15,176 @@ class FirstStepsScreen extends StatefulWidget {
 
 class _FirstStepsScreenState extends State<FirstStepsScreen> {
 
+  late Future<Country> futureAlbum;
+
   final TextEditingController colorController = TextEditingController();
   final TextEditingController iconController = TextEditingController();
-  IconLabel? selectedIcon;
+
+  String country = 'Choose your country';
+  String city = 'Choose your city';
+
+  AlertDialog showSearchApi(){
+    return AlertDialog(
+      title: const Text('Country'),
+      content: SizedBox(
+        width: double.maxFinite,
+        child: FutureBuilder(
+          future: CountryCityService().listCountries(),
+
+          builder: (context, snapshot) {
+            // Requisição finalizada
+            if (snapshot.connectionState == ConnectionState.done) {
+              
+              var lista = snapshot.data as List<Country>;
+
+              return DropdownMenu(
+                enableFilter: true,
+                label: const Text('Type your country'),
+                width: 250,
+                menuHeight: 200,
+                
+                dropdownMenuEntries: lista.map<DropdownMenuEntry<Country>>((Country country) {
+                  return DropdownMenuEntry<Country>(
+                    label: country.name,
+                    value: country,
+                  );},
+                ).toList(),
+                onSelected: (value) => {
+                  setState(() {
+                    country = value!.name;
+                    
+                  }),
+                  Navigator.pop(context)
+                },
+              );
+            }
+
+            //Aguardando a requisição
+            return const Center(child: CircularProgressIndicator());
+          },
+        ),
+      )
+    );
+
+    // DropdownMenu<String>(
+    //       controller: iconController,
+    //       enableFilter: true,
+    //       requestFocusOnTap: true,
+    //       width: 250,
+    //       label: const Text(
+    //         'Icon',
+    //         textAlign: TextAlign.center,
+    //       ),
+    //       inputDecorationTheme: const InputDecorationTheme(
+            
+    //         floatingLabelAlignment: FloatingLabelAlignment.start,
+    //         // floatingLabelBehavior: FloatingLabelBehavior.always,
+            
+    //         activeIndicatorBorder: BorderSide(color: Colors.black),
+            
+    //         border: OutlineInputBorder(
+    //           borderRadius: BorderRadius.all(Radius.circular(5.0)),
+    //           borderSide: BorderSide(
+    //             color: Colors.black),
+    //         ),
+            
+    //         focusedBorder: OutlineInputBorder(
+    //           borderRadius: BorderRadius.all(Radius.circular(5.0)),
+    //         ),
+            
+    //         enabledBorder: OutlineInputBorder(
+    //           borderRadius: BorderRadius.all(Radius.circular(5.0)),
+    //           borderSide: BorderSide(color: Colors.black),
+    //         ),
+            
+    //         labelStyle: TextStyle(color: Colors.black)
+    //       ),
+            
+    //       // expandedInsets: EdgeInsets.all(20),
+          
+    //       menuStyle: const MenuStyle(
+    //         side: WidgetStatePropertyAll<BorderSide>(
+    //           BorderSide(
+    //             color: Color(0xFFFFFFFF),
+    //           ),
+    //         ),
+    //         shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+    //           RoundedRectangleBorder(
+    //             borderRadius: BorderRadius.all(Radius.circular(5.0))
+    //           )
+    //         )
+    //       ),
+          
+    //       onSelected: (IconLabel? icon) {
+    //         setState(() {
+    //           selectedIcon = icon;
+    //           country = icon!.label;
+    //           Navigator.pop(context);
+    //         });
+    //       },
+            
+    //       dropdownMenuEntries:
+    //         IconLabel.values.map<DropdownMenuEntry<IconLabel>>((IconLabel icon) {
+    //           return DropdownMenuEntry<IconLabel>(
+    //             value: icon,
+    //             label: icon.label,
+    //             leadingIcon: Icon(icon.icon),
+    //           );},
+    //         ).toList(),
+  //       ),
+  //     ),
+  //   );
+  }
+
+  
+  
+  AlertDialog showSearchCity(){
+    return AlertDialog(
+      title: const Text('City'),
+      content: SizedBox(
+        width: double.maxFinite,
+        child: FutureBuilder(
+          future: CountryCityService().listCities(),
+
+          builder: (context, snapshot) {
+            // Requisição finalizada
+            if (snapshot.connectionState == ConnectionState.done) {
+              
+              var lista = snapshot.data as List<City>;
+
+              return DropdownMenu(
+                enableFilter: true,
+                label: const Text('Type your city'),
+                width: 250,
+                menuHeight: 200,
+                
+                dropdownMenuEntries: lista.map<DropdownMenuEntry<City>>((City city) {
+                  return DropdownMenuEntry<City>(
+                    label: city.name,
+                    value: city,
+                  );},
+                ).toList(),
+                onSelected: (value) => {
+                  setState(() {
+                    country = value!.name;
+                    
+                  }),
+                  Navigator.pop(context)
+                },
+              );
+            }
+
+            //Aguardando a requisição
+            return const Center(child: CircularProgressIndicator());
+          },
+        ),
+      )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-
+  
   const txtTitleStyle = TextStyle(
     color: Color(0xFFFFFFFF),
     fontSize: 36
@@ -49,9 +198,6 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
       borderRadius: BorderRadius.all(Radius.circular(5.0))
     )
   );
-  double width = MediaQuery.of(context).size.width - 16.0;
-  final TextEditingController menuController = TextEditingController();
-  MenuItem? selectedMenu;
 
   return Scaffold(
           //  appBar: AppBar(toolbarOpacity: 1,),
@@ -86,86 +232,35 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
                     iconAlignment: IconAlignment.start,
                   ),
                   const SizedBox(height: 15,),
-                  // OutlinedButton.icon(
-                  //   onPressed: ()=>{
-                  //     Navigator.pushNamed(context, '/main')
-                  //   }, 
-                  //   label: const Text('Brazil'),
-                  //   style: buttonStyle,
-                  // ),
-                  
-                  DropdownMenu<MenuItem>(
-                    //initialSelection: menuItems.first,
-                    controller: menuController,
-                    width: width,
-                    hintText: "Select country",
-                    requestFocusOnTap: true,
-                    enableFilter: true,
-                    menuStyle: MenuStyle(
-                      backgroundColor: WidgetStateProperty.all<Color>(
-                          Colors.lightBlue.shade50),
-                    ),
-
-                    label: const Text('Select country'),
-                    onSelected: (MenuItem? menu) {
-                      setState(() {
-                        selectedMenu = menu;
-                      });
-                    },
-                    dropdownMenuEntries:
-                        menuItems.map<DropdownMenuEntry<MenuItem>>((MenuItem menu) {
-                      return DropdownMenuEntry<MenuItem>(
-                          value: menu,
-                          label: menu.label,
-                          leadingIcon: Icon(menu.icon));
-                    }).toList(),
+                  OutlinedButton.icon(
+                    onPressed: ()=>{
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return showSearchApi();
+                        }
+                      )
+                      // Navigator.pushNamed(context, '/main')
+                    }, 
+                    label: Text(country),
+                    style: buttonStyle,
                   ),
+                  
                   const SizedBox(height: 15,),
-                  DropdownMenu<IconLabel>(
-                      controller: iconController,
-                      enableFilter: true,
-                      requestFocusOnTap: true,
-                      leadingIcon: const Icon(Icons.search),
-                      label: const Text('Icon'),
-                      width: double.maxFinite,
-                      inputDecorationTheme: const InputDecorationTheme(
-                        
-                        suffixIconColor: Colors.white,
-                        prefixIconColor: Colors.white,
-
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-
-                        labelStyle: TextStyle(color: Colors.white)
-                      ),
-
-                      onSelected: (IconLabel? icon) {
-                        setState(() {
-                          selectedIcon = icon;
-                        });
-                      },
-
-                      dropdownMenuEntries:
-                          IconLabel.values.map<DropdownMenuEntry<IconLabel>>(
-                        (IconLabel icon) {
-                          return DropdownMenuEntry<IconLabel>(
-                            value: icon,
-                            label: icon.label,
-                            leadingIcon: Icon(icon.icon),
-                          );
-                        },
-                      ).toList(),
-                    ),
-                  // OutlinedButton.icon(
-                  //   onPressed: ()=>{
-                  //     Navigator.pushNamed(context, '/main')
-                  //   }, 
-                  //   label: const Text('São Paulo'),
-                  //   // child: Text('Login with Google'),
-                  //   style: buttonStyle,
-                  // ),
+                  
+                  OutlinedButton.icon(
+                    
+                    onPressed: ()=>{
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return showSearchCity();
+                        }
+                      )// Navigator.pushNamed(context, '/main')
+                    }, 
+                    label: Text(city),
+                    style: buttonStyle,
+                  ),
                   const SizedBox(height: 15,),
                   TextButtonStandard(
                     text: 'Continue',

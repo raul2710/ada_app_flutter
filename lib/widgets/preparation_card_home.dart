@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'PreparationOptions.dart';
-import 'TitleCardHome.dart';
+import 'preparation_options.dart';
+import 'title_card_home.dart';
 
 class PreparationCardHome extends StatelessWidget {
   const PreparationCardHome({

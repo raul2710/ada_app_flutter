@@ -1,8 +1,10 @@
-import 'package:ada_app_flutter/widgets/TextButtonStandard.dart';
-import 'package:ada_app_flutter/widgets/OutlinedButtonStandard.dart';
+import 'package:ada_app_flutter/widgets/text_button_standard.dart';
+import 'package:ada_app_flutter/widgets/outlined_button_standard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
+import '../model/person.dart';
 import '../widgets/textformfield_stardard.dart';
 
 class SubscribeScreen extends StatefulWidget {
@@ -17,7 +19,8 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
   var firstName = TextEditingController();
   var lastName = TextEditingController();
   var birthDate = TextEditingController();
-  var email = TextEditingController();
+
+  var gender;
 
   List<bool> isChecked = [false, false, false];
 
@@ -107,6 +110,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                 setState(() {
                                   clearChecked();
                                   isChecked[0] = value!;
+                                  gender = 'cisgender';
                                 });
                               },
                             ),
@@ -118,6 +122,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                 setState(() {
                                   clearChecked();
                                   isChecked[1] = value!;
+                                  gender = 'transgender';
                                 });
                               },
                             ),
@@ -128,6 +133,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                 setState(() {
                                   clearChecked();
                                   isChecked[2] = value!;
+                                  gender = 'non-binary';
                                 });
                               },
                             ),
@@ -203,7 +209,19 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                       }),
                       OutlinedButtonStandard(text: 'Follow', onPressed: (){
                         if(formKey.currentState!.validate()){
-                            Navigator.pushNamed(context, '/subscribe-email-password');
+                          
+                          Person person = Person(
+                            birthDate: Timestamp.now(),
+                            firstName: firstName.text,
+                            lastName: lastName.text,
+                            gender: gender,
+                          );
+
+                          Navigator.pushNamed(
+                            context, 
+                            '/subscribe-email-password',
+                            arguments: person,
+                          );
                             // LoginController().createUserWithEmailAndPassword(
                             //   context,
                             //   email.toString(),

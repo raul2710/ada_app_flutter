@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'firebase_options.dart';
+import 'view/alerts_screen.dart';
+import 'view/emergency_kit_screen.dart';
 import 'view/first_steps_screen.dart';
 import 'view/login_options_screen.dart';
 import 'view/login_with_email_and_password_screen.dart';
@@ -80,6 +82,8 @@ class MainApp extends StatelessWidget {
         '/verify' :(context) => const VerifyScreen(),
         '/loginwithemailandpassword' :(context) => const LoginWithEmailAndPasswordScreen(),
         '/subscribe-email-password' :(context) => const SubscribeEmailPasswordScreen(),
+        '/emergency-kit' :(context) => const EmergencyKit(),
+        '/alerts' :(context) => const AlertsScreen(),
         
         // 'screenAddTrip' :(context) => ScreenAddTrip(),
         // 'screenViewTrip' :(context) => ScreenViewTrip(),

@@ -1,3 +1,4 @@
+import 'package:ada_app_flutter/model/person.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,23 +9,26 @@ class LoginController {
   //
   // CRIAR CONTA de um usuário no serviço Firebase Authentication
   //
-  createUserWithEmailAndPassword(context, firstName, lastName, birthDate, emailAddress, password) {
+  createUserWithEmailAndPassword(context, emailAddress, password, /*person*/firstName, lastName, birthDate, gender) {
     FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: emailAddress,
       password: password,
     ).then(
       (resultado) {
         //Usuário criado com sucesso!
-
+        
         //Armazenar o NOME e UID do usuário no Firestore
         FirebaseFirestore.instance.collection("users").add(
           {
             "uid": resultado.user!.uid,
+            "firstName": firstName,
+            "lastName": lastName,
+            "birthDate": birthDate,
+            "gender": gender,
           },
         );
-
         // sucesso(context, 'Usuário criado com sucesso!');
-        Navigator.pop(context);
+        // Navigator.pop(context);
       },
     ).catchError((e) {
       //Erro durante a criação do usuário
@@ -39,6 +43,7 @@ class LoginController {
           // erro(context, 'ERRO: ${e.toString()}');
       }
     });
+    // .onError((e, _) => print("Error writing document: $e"));
   }
 
   //
@@ -51,7 +56,7 @@ class LoginController {
         password: password
       ).then((result) {
           // sucesso(context, 'Usuário autenticado com sucesso!');
-          Navigator.pushNamed(context, 'main');
+          Navigator.pushNamed(context, '/first-steps');
         }
       );
     } on FirebaseAuthException catch (e) {
@@ -61,27 +66,6 @@ class LoginController {
         print('Wrong password provided for that user.');
       }
     }
-    // FirebaseAuth.instance
-    //     .signInWithEmailAndPassword(
-    //       email: emailAddress, 
-    //       password: password
-    //     )
-    //     .then((resultado) {
-          
-    //   // sucesso(context, 'Usuário autenticado com sucesso!');
-    //   // Navigator.pushNamed(context, 'main');
-
-    // }).catchError((e) {
-    //   print(e);
-    //   switch (e.code) {
-    //     case 'invalid-email':
-    //       // erro(context, 'O formato do e-mail é inválido.');
-    //     case 'invalid-credential':
-    //       // erro(context, 'Usuário e/ou senha inválida.');
-    //     default:
-    //       // erro(context, 'ERRO: ${e.code.toString()}');
-    //   }
-    // });
   }
 
   sendPasswordResetEmail(context, email) {

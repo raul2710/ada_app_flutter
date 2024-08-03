@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'TitleCardHome.dart';
+import 'title_card_home.dart';
 
 class ClickableCardHome extends StatelessWidget {
   

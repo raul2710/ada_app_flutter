@@ -1,8 +1,8 @@
 import 'package:ada_app_flutter/controller/login_controller.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/TextButtonStandard.dart';
-import '../widgets/OutlinedButtonStandard.dart';
+import '../widgets/text_button_standard.dart';
+import '../widgets/outlined_button_standard.dart';
 import '../widgets/textformfield_stardard.dart';
 
 class LoginWithEmailAndPasswordScreen extends StatefulWidget {
@@ -25,8 +25,8 @@ class _LoginWithEmailAndPasswordScreenState extends State<LoginWithEmailAndPassw
     if(formKey.currentState!.validate()){
       LoginController().signInWithEmailAndPassword(
         context,
-        email.toString(),
-        password.toString()
+        email.text,
+        password.text,
       );
     }
   }
@@ -83,7 +83,7 @@ class _LoginWithEmailAndPasswordScreenState extends State<LoginWithEmailAndPassw
                  Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: (){},
+                    onPressed: (){LoginController().sendPasswordResetEmail(context, email.text);},
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.all(0),
                       foregroundColor: const Color(0xFF000000)

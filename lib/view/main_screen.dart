@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../widgets/ClickableCardHome.dart';
-import '../widgets/NoticeCard.dart';
-import '../widgets/PreparationCardHome.dart';
-import '../widgets/TitleCardHome.dart';
-import 'kit_screen.dart';
+import '../widgets/clickable_card_home.dart';
+import '../widgets/notice_card.dart';
+import '../widgets/preparation_card_home.dart';
+import '../widgets/title_card_home.dart';
+import 'emergency_kit_screen.dart';
 import 'quiz_screen.dart';
 import 'shelter_map_screen.dart';
 
@@ -71,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
               titleCard: 'Emergency Kit', 
               image: 'lib/images/SurviveKit.png', 
               description: 'Use Gemini IA to personalize your emergency kit according to the emergency situation',
-              onTap: (){print('Test tap Emergency Kit');},
+              onTap: () => {Navigator.pushNamed(context, '/emergency-kit')},
             ),
 
             ClickableCardHome(
@@ -80,6 +80,14 @@ class _MainScreenState extends State<MainScreen> {
               image: 'lib/images/image_maps.jpg', 
               description: 'Look for shelters nearby and define escape routes',
               onTap: (){print('Test tap Map');},
+            ),
+
+            ClickableCardHome(
+              color: Colors.green,
+              titleCard: 'Alerts', 
+              image: 'lib/images/warning.png', 
+              description: 'Look for shelters nearby and define escape routes',
+              onTap: () => {Navigator.pushNamed(context, '/alerts')},
             ),
 
             Column(
