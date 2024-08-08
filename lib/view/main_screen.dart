@@ -5,9 +5,7 @@ import '../widgets/clickable_card_home.dart';
 import '../widgets/notice_card.dart';
 import '../widgets/preparation_card_home.dart';
 import '../widgets/title_card_home.dart';
-import 'emergency_kit_screen.dart';
 import 'quiz_screen.dart';
-import 'shelter_map_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -30,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     
     const navBarIcon = Color(0xFFFFFFFF);
-    const navBarIconEmergency = Color(0xFFFF0000);
+    // const navBarIconEmergency = Color(0xFFFF0000);
     
     return Scaffold(
       appBar: AppBar(
