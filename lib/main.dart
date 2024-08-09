@@ -12,7 +12,6 @@ import 'view/main_screen.dart';
 import 'view/preparation_screen.dart';
 import 'view/subscribe_email_password.dart';
 import 'view/subscribe_screen.dart';
-import 'view/verify_screen.dart';
 
 // void main() {
 //   runApp(const MainApp());
@@ -79,7 +78,6 @@ class MainApp extends StatelessWidget {
         '/subscribe' :(context) => const SubscribeScreen(),
         '/first-steps' :(context) => const FirstStepsScreen(),
         '/main' :(context) => const MainScreen(),
-        '/verify' :(context) => const VerifyScreen(),
         '/loginwithemailandpassword' :(context) => const LoginWithEmailAndPasswordScreen(),
         '/subscribe-email-password' :(context) => const SubscribeEmailPasswordScreen(),
         '/emergency-kit' :(context) => const EmergencyKit(),

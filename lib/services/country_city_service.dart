@@ -1,14 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-import '../model/city.dart';
-import '../model/country.dart';
-
 class CountryCityService {
 
-   Future<List<Country>> listCountries() async {
+   Future<List<String>> listCountries() async {
     var resposta = await http.get(
       Uri.parse(
         'https://countriesnow.space/api/v0.1/countries/flag/images',
@@ -17,26 +13,27 @@ class CountryCityService {
 
     if (resposta.statusCode == 200) {
       Iterable lista = json.decode(resposta.body)['data'];
-      return lista.map((modelo) => Country.fromJson(modelo)).toList();
+      return lista.map((modelo) => modelo['name'].toString()).toList();
     } else {
       return [];
     }
   }
 
-  Future<List<City>> listCities() async {
+  Future<List<String>> listCities(String country) async {
     var resposta = await http.post(
       Uri.parse(
         'https://countriesnow.space/api/v0.1/countries/cities',
       ),
       body:
       {
-        "country": "Brazil"
+        "country": country
       }
     );
 
     if (resposta.statusCode == 200) {
       Iterable lista = json.decode(resposta.body)['data'];
-      return lista.map((modelo) => City(modelo)).toList();
+      print(lista);
+      return lista.map((modelo) => modelo.toString()).toList();
     } else {
       return [];
     }

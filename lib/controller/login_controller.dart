@@ -1,13 +1,10 @@
-import 'package:ada_app_flutter/model/person.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-// import '../view/util.dart';
-
 class LoginController {
   //
-  // CRIAR CONTA de um usuário no serviço Firebase Authentication
+  // Create an account in Firebase Authentication Service
   //
   createUserWithEmailAndPassword(context, emailAddress, password, /*person*/firstName, lastName, birthDate, gender) {
     FirebaseAuth.instance.createUserWithEmailAndPassword(

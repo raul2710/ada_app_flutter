@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../model/person.dart';
-import '../widgets/textformfield_stardard.dart';
+import '../widgets/text_form_field_stardard.dart';
 
 class SubscribeEmailPasswordScreen extends StatefulWidget {
 
