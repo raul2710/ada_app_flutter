@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import '../view/chat_screen.dart';
 
 import 'firebase_options.dart';
 import 'view/alerts_screen.dart';
@@ -40,19 +41,17 @@ import 'view/subscribe_screen.dart';
 // await Firebase.initializeApp(
 //     options: DefaultFirebaseOptions.currentPlatform,
 // );
-const clientId = '830251467767-otheok9k6qetdqnh9m7i08jjplsl92nm.apps.googleusercontent.com';
+const clientId =
+    '830251467767-otheok9k6qetdqnh9m7i08jjplsl92nm.apps.googleusercontent.com';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
+
   runApp(
-    DevicePreview(
-      enabled: true,
-      builder: (context) => const MainApp()
-      ),
+    DevicePreview(enabled: true, builder: (context) => const MainApp()),
   );
 }
 
@@ -66,30 +65,32 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Navegação',
-      //
-      //ROTAS DE NAVEGAÇÃO
-      //
-      initialRoute: '/login',
-      routes: {
-        '/login' :(context) => const LoginOptions(),
-        '/preparation' :(context) => const Preparation(),
-        '/subscribe' :(context) => const SubscribeScreen(),
-        '/first-steps' :(context) => const FirstStepsScreen(),
-        '/main' :(context) => const MainScreen(),
-        '/loginwithemailandpassword' :(context) => const LoginWithEmailAndPasswordScreen(),
-        '/subscribe-email-password' :(context) => const SubscribeEmailPasswordScreen(),
-        '/emergency-kit' :(context) => const EmergencyKit(),
-        '/alerts' :(context) => const AlertsScreen(),
-        
-        // 'screenAddTrip' :(context) => ScreenAddTrip(),
-        // 'screenViewTrip' :(context) => ScreenViewTrip(),
-        // 'screenSearchTrip' :(context) => ScreenSearchTrip(),
-        // 'screenListCategory' :(context) => ScreenListCategory(),
-        // 'screenSearchTripCategory' :(context) => ScreenSearchTripCategory(),
-        // 'screenAbout' :(context) => ScreenAbout(),
-      }
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Navegação',
+        //
+        //ROTAS DE NAVEGAÇÃO
+        //
+        initialRoute: '/login',
+        routes: {
+          '/login': (context) => const LoginOptions(),
+          '/preparation': (context) => const Preparation(),
+          '/subscribe': (context) => const SubscribeScreen(),
+          '/first-steps': (context) => const FirstStepsScreen(),
+          '/main': (context) => const MainScreen(),
+          '/loginwithemailandpassword': (context) =>
+              const LoginWithEmailAndPasswordScreen(),
+          '/subscribe-email-password': (context) =>
+              const SubscribeEmailPasswordScreen(),
+          '/emergency-kit': (context) => const EmergencyKit(),
+          '/alerts': (context) => const AlertsScreen(),
+          '/chat': (context) => const ChatScreen(),
+
+          // 'screenAddTrip' :(context) => ScreenAddTrip(),
+          // 'screenViewTrip' :(context) => ScreenViewTrip(),
+          // 'screenSearchTrip' :(context) => ScreenSearchTrip(),
+          // 'screenListCategory' :(context) => ScreenListCategory(),
+          // 'screenSearchTripCategory' :(context) => ScreenSearchTripCategory(),
+          // 'screenAbout' :(context) => ScreenAbout(),
+        });
   }
 }

@@ -23,13 +23,11 @@ class _MainScreenState extends State<MainScreen> {
   Color navBarBackground = const Color(0xFFE88C38);
   Color navBarIndicator = const Color(0xFF3F80EA);
 
-
   @override
   Widget build(BuildContext context) {
-    
     const navBarIcon = Color(0xFFFFFFFF);
     // const navBarIconEmergency = Color(0xFFFF0000);
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Welcome to ADA'),
@@ -37,76 +35,85 @@ class _MainScreenState extends State<MainScreen> {
         foregroundColor: const Color(0xFFFFFFFF),
         backgroundColor: const Color(0xFFE88C38),
         actions: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.notifications_outlined)),
-          IconButton(onPressed: (){}, icon: const Icon(Icons.settings_outlined))
+          IconButton(
+              onPressed: () {}, icon: const Icon(Icons.notifications_outlined)),
+          IconButton(
+              onPressed: () {}, icon: const Icon(Icons.settings_outlined))
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            
             PreparationCardHome(
-              onTapPreparation: (){Navigator.pushNamed(context, '/preparation');},
-
-              onTapIntroduction: (){print('Test tap Emergency Introduction');},
-              onTapPlanning: (){print('Test tap Emergency Planning');},
-              onTapSimulate: (){print('Test tap Emergency Simulate');},
+              onTapPreparation: () {
+                Navigator.pushNamed(context, '/preparation');
+              },
+              onTapIntroduction: () {
+                print('Test tap Emergency Introduction');
+              },
+              onTapPlanning: () {
+                print('Test tap Emergency Planning');
+              },
+              onTapSimulate: () {
+                print('Test tap Emergency Simulate');
+              },
             ),
-
             ClickableCardHome(
               color: mapsColor,
-              titleCard: 'Quiz', 
-              image: 'lib/images/SurviveKit.png', 
-              description: 'Use Gemini IA to personalize your emergency kit according to the emergency situation',
+              titleCard: 'Quiz',
+              image: 'lib/images/SurviveKit.png',
+              description:
+                  'Use Gemini IA to personalize your emergency kit according to the emergency situation',
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => QuizScreen()),
               ),
             ),
-
             ClickableCardHome(
               color: emergencyKitColor,
-              titleCard: 'Emergency Kit', 
-              image: 'lib/images/SurviveKit.png', 
-              description: 'Use Gemini IA to personalize your emergency kit according to the emergency situation',
+              titleCard: 'Emergency Kit',
+              image: 'lib/images/SurviveKit.png',
+              description:
+                  'Use Gemini IA to personalize your emergency kit according to the emergency situation',
               onTap: () => {Navigator.pushNamed(context, '/emergency-kit')},
             ),
-
             ClickableCardHome(
               color: mapsColor,
-              titleCard: 'Shelter', 
-              image: 'lib/images/image_maps.jpg', 
-              description: 'Look for shelters nearby and define escape routes',
-              onTap: (){print('Test tap Map');},
+              titleCard: 'Chat',
+              image: 'lib/images/image_maps.jpg',
+              description: "I'm here to help, so feel free to ask anything!",
+              onTap: () => {Navigator.pushNamed(context, '/chat')},
             ),
-
             ClickableCardHome(
               color: Colors.green,
-              titleCard: 'Alerts', 
-              image: 'lib/images/warning.png', 
+              titleCard: 'Alerts',
+              image: 'lib/images/warning.png',
               description: 'Look for shelters nearby and define escape routes',
               onTap: () => {Navigator.pushNamed(context, '/alerts')},
             ),
-
             Column(
               children: [
                 const TitleCardHome(title: 'Updated News'),
                 NoticeCard(
                   title: 'Earthquake on Japan',
-                  description: 'Cracked street after earthquake .ADA were used to spare alerts to the population to avoid the most affected areas and roads',
+                  description:
+                      'Cracked street after earthquake .ADA were used to spare alerts to the population to avoid the most affected areas and roads',
                   image: 'lib/images/ex_notice1.png',
                   time: 'Today - 23min',
-                  onTap: (){print('Test tap Notice 1');},
+                  onTap: () {
+                    print('Test tap Notice 1');
+                  },
                 ),
-            
                 NoticeCard(
                   title: 'Floods in Brazil, in Rio Grande do Sul State ',
-                  description: 'Description duis aute irure dolor in reprehenderit in voluptate velit.',
+                  description:
+                      'Description duis aute irure dolor in reprehenderit in voluptate velit.',
                   image: 'lib/images/ex_notice2.png',
                   time: 'Today - 23min',
-                  onTap: (){print('Test tap Notice 2');},
+                  onTap: () {
+                    print('Test tap Notice 2');
+                  },
                 )
-            
               ],
             ),
           ],
@@ -118,22 +125,29 @@ class _MainScreenState extends State<MainScreen> {
             currentPageIndex = index;
           });
         },
-
         backgroundColor: navBarBackground,
-        indicatorColor:navBarIndicator,
+        indicatorColor: navBarIndicator,
         selectedIndex: currentPageIndex,
-        
         destinations: const <Widget>[
           NavigationDestination(
-            icon: Icon(Icons.menu, color: navBarIcon,),
+            icon: Icon(
+              Icons.menu,
+              color: navBarIcon,
+            ),
             label: 'Main Menu',
           ),
           NavigationDestination(
-            icon: Icon(Icons.info, color: navBarIcon,),
+            icon: Icon(
+              Icons.info,
+              color: navBarIcon,
+            ),
             label: 'Emergency Mode',
           ),
           NavigationDestination(
-            icon: Icon(Icons.person, color: navBarIcon,),
+            icon: Icon(
+              Icons.person,
+              color: navBarIcon,
+            ),
             label: 'Contacts',
           ),
         ],
