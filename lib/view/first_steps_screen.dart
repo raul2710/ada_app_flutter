@@ -44,6 +44,19 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
       borderRadius: BorderRadius.all(Radius.circular(5.0))
     )
   );
+  var dropDownDecorator = const DropDownDecoratorProps(
+    textAlignVertical: TextAlignVertical.center,
+    baseStyle: TextStyle(color: Colors.white),
+    textAlign: TextAlign.center,
+    dropdownSearchDecoration: InputDecoration(
+      contentPadding: EdgeInsets.all(0),
+       constraints: BoxConstraints(maxHeight: 35, maxWidth: 300),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color(0xFFFFFFFF),),
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      )
+    ),
+  );
 
   return Scaffold(
           //  appBar: AppBar(toolbarOpacity: 1,),
@@ -80,27 +93,6 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
                   
                   const SizedBox(height: 15,),
 
-              //     FutureBuilder(
-              //   future: countries,
-              //   builder: (context, snapshot) {
-              //     if (snapshot.connectionState == ConnectionState.done) {
-              //       var lista = snapshot.data as List<String>;
-              //       return DropdownMenu(
-              //         width: 360,
-              //         onSelected: (value) {},
-              //         dropdownMenuEntries:
-              //             lista.map<DropdownMenuEntry<String>>((Marca marca) {
-              //           return DropdownMenuEntry<String>(
-              //             value: marca.codigo,
-              //             label: marca.nome,
-              //           );
-              //         }).toList(),
-              //       );
-              //     }
-              //     return Center(child: CircularProgressIndicator());
-              //   },
-              // ),
-
                   DropdownSearch<String>(
                     asyncItems: (String filter) => CountryCityService().listCountries(),
                     
@@ -110,21 +102,10 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
                       title: Text('Choose your country'),
                       showSearchBox: true,
                     ),
-                    dropdownButtonProps: DropdownButtonProps(
+                    dropdownButtonProps: const DropdownButtonProps(
                       color: Color(0xFFFFFFFF),
                     ),
-                    dropdownDecoratorProps: const DropDownDecoratorProps(
-                      textAlignVertical: TextAlignVertical.center,
-                      dropdownSearchDecoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFFFFFFF),
-
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        )
-                      ),
-                    ),
+                    dropdownDecoratorProps: dropDownDecorator,
                     onChanged: (value) {
                       setState(() {
                         countrySelected = value.toString();
@@ -144,33 +125,10 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
                       title: Text('Choose your city'),
                       showSearchBox: true,
                     ),
-
                     dropdownButtonProps: const DropdownButtonProps(
-                      alignment: Alignment.center,
-                      disabledColor: Color(0xFFFFFFFF),
                       color: Color(0xFFFFFFFF),
                     ),
-                    
-                    dropdownDecoratorProps: const DropDownDecoratorProps(
-                      
-                      dropdownSearchDecoration: InputDecoration(
-                        disabledBorder: InputBorder.none,
-
-                        border: OutlineInputBorder(
-                          
-                          gapPadding: 15,
-                          borderSide: BorderSide(
-                            color: Colors.white,width: 15,
-                          )
-                        ),
-                      ),
-                      textAlignVertical: TextAlignVertical.center,
-                      textAlign: TextAlign.center,
-                      baseStyle: TextStyle(
-                        color: Color(0xFFFFFFFF),
-                      ),
-                    ),
-
+                    dropdownDecoratorProps: dropDownDecorator,
                     onChanged: (value) {
                       setState(() {
                         citySelected = value.toString();
