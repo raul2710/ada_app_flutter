@@ -1,8 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-/// Flutter code sample for [PageView].
+
+const TextStyle titleStyle = TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold
+);
+
 class Preparation extends StatelessWidget {
   const Preparation({super.key});
 
@@ -25,7 +29,8 @@ class PageViewExample extends StatefulWidget {
 }
 
 class _PageViewExampleState extends State<PageViewExample>
-    with TickerProviderStateMixin {
+  with TickerProviderStateMixin {
+    
   late PageController _pageViewController;
   late TabController _tabController;
   int _currentPageIndex = 0;
@@ -34,7 +39,7 @@ class _PageViewExampleState extends State<PageViewExample>
   void initState() {
     super.initState();
     _pageViewController = PageController();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -46,37 +51,31 @@ class _PageViewExampleState extends State<PageViewExample>
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Stack(
       alignment: Alignment.bottomCenter,
       children: <Widget>[
         PageView( 
-          /// [PageView.scrollDirection] defaults to [Axis.horizontal].
-          /// Use [Axis.vertical] to scroll vertically.
           scrollBehavior: MyCustomScrollBehavior(),
           controller: _pageViewController,
           onPageChanged: _handlePageViewChanged,
           children: const <Widget>[
-            Introduction(),
-            NaturalDisaster(),
-
+            IntroductionPage(),
+            NaturalDisasterPage(),
+            HowGetPreparatedPage(),
+            EmergencyKitPage(),
           ],
         ),
         PageIndicator(
           tabController: _tabController,
           currentPageIndex: _currentPageIndex,
           onUpdateCurrentPageIndex: _updateCurrentPageIndex,
-          isOnDesktopAndWeb: _isOnDesktopAndWeb,
         ),
       ],
     );
   }
 
   void _handlePageViewChanged(int currentPageIndex) {
-    if (!_isOnDesktopAndWeb) {
-      return;
-    }
     _tabController.index = currentPageIndex;
     setState(() {
       _currentPageIndex = currentPageIndex;
@@ -92,31 +91,7 @@ class _PageViewExampleState extends State<PageViewExample>
     );
   }
 
-  bool get _isOnDesktopAndWeb {
-    if (kIsWeb) {
-      return true;
-    }
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.macOS:
-      case TargetPlatform.linux:
-      case TargetPlatform.windows:
-        return true;
-      case TargetPlatform.android:
-      case TargetPlatform.iOS:
-      case TargetPlatform.fuchsia:
-        return false;
-    }
-  }
 }
-
-/// Page indicator for desktop and web platforms.
-///
-/// On Desktop and Web, drag gesture for horizontal scrolling in a PageView is disabled by default.
-/// You can defined a custom scroll behavior to activate drag gestures,
-/// see https://docs.flutter.dev/release/breaking-changes/default-scroll-behavior-drag.
-///
-/// In this sample, we use a TabPageSelector to navigate between pages,
-/// in order to build natural behavior similar to other desktop applications.
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
@@ -134,19 +109,14 @@ class PageIndicator extends StatelessWidget {
     required this.tabController,
     required this.currentPageIndex,
     required this.onUpdateCurrentPageIndex,
-    required this.isOnDesktopAndWeb,
   });
 
   final int currentPageIndex;
   final TabController tabController;
   final void Function(int) onUpdateCurrentPageIndex;
-  final bool isOnDesktopAndWeb;
 
   @override
   Widget build(BuildContext context) {
-    if (!isOnDesktopAndWeb) {
-      return const SizedBox.shrink();
-    }
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Padding(
@@ -177,7 +147,7 @@ class PageIndicator extends StatelessWidget {
             splashRadius: 16.0,
             padding: EdgeInsets.zero,
             onPressed: () {
-              if (currentPageIndex == 2) {
+              if (currentPageIndex == 3) {
                 return;
               }
               onUpdateCurrentPageIndex(currentPageIndex + 1);
@@ -193,13 +163,8 @@ class PageIndicator extends StatelessWidget {
   }
 }
 
-class Introduction extends StatelessWidget {
-  const Introduction ({ super.key });
-
-  final TextStyle titleStyle = const TextStyle(
-    fontSize: 25.0,
-    fontWeight: FontWeight.bold
-  );
+class IntroductionPage extends StatelessWidget {
+  const IntroductionPage ({ super.key });
 
   @override
   Widget build(BuildContext context) {
@@ -210,8 +175,8 @@ class Introduction extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
 
           children: [
-            Text(
-              'Preparation',
+            const Text(
+              'Introduction',
               style: titleStyle,
               textAlign: TextAlign.start,
             ),
@@ -221,13 +186,12 @@ class Introduction extends StatelessWidget {
             const SizedBox(height: 15.0,),
 
             const Text(
-              'Introduction',
-              style: TextStyle(fontSize: 15.0),
+              """
+Hello Dear User!
+
+We are happy that you decided to dowload ADA’s app. This app will help people to prepare themselves to possible disasters that can happen. Will provide too, useful information in order to prepare your emergency kit. Any question? You can use the Gemini to ask anything that you need to learn about natural disaster and how to get prepared for them.  
+              """
             ),
-
-            const SizedBox(height: 15.0,),
-
-            const Text("Hello Dear User! We are happy that you decided to dowload ADA’s app. This app will help people to prepare themselves to possible disasters that can happen. Will provide too, useful information in order to"),
             
             Align(
               alignment: Alignment.center,
@@ -241,20 +205,15 @@ class Introduction extends StatelessWidget {
   }
 }
 
-class NaturalDisaster extends StatelessWidget {
-  const NaturalDisaster ({ super.key });
-
-  final TextStyle titleStyle = const TextStyle(
-    fontSize: 25.0,
-    fontWeight: FontWeight.bold
-  );
+class NaturalDisasterPage extends StatelessWidget {
+  const NaturalDisasterPage ({ super.key });
 
   @override
   Widget build(BuildContext context) {
 
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
       
@@ -265,109 +224,91 @@ class NaturalDisaster extends StatelessWidget {
                 textAlign: TextAlign.start,
               ),
       
-              const Divider(),
+              Divider(),
       
-              const SizedBox(height: 15.0,),
-      
-              const Text(
-                'Introduction',
-                style: TextStyle(fontSize: 15.0),
-              ),
-      
-              const SizedBox(height: 15.0,),
-      
-              const Text(
-                "A natural disaster is a catastrophic event caused by natural processes that overwhelm local resources and threaten the function and safety of a community. "
-              ),
-              const SizedBox(height: 15.0,),
-              const Text(
-                "These events are often sudden and destructive, resulting in significant loss of life, property damage, and environmental disruption."
-              ),
+              SizedBox(height: 15.0,),
 
-              const Text(
-                "These events are often sudden and destructive, resulting in significant loss of life, property damage, and environmental disruption."
-              ),
+              Text(
+                """ 
+A natural disaster is a catastrophic event caused by natural processes that overwhelm local resources and threaten the function and safety of a community.  
 
-              const Text(
-                " "
+These events are often sudden and destructive, resulting in significant loss of life, property damage, and environmental disruption.  
+
+Key characteristics of a natural disaster:
+ • Natural origin: Caused by forces of nature, not human actions.  
+ • Sudden and destructive: Often occur without warning and cause widespread damage.  
+ • Overwhelms resources: Exceeds the capacity of a community to respond effectively.  
+ • Significant impact: Leads to loss of life, property damage, and disruption of normal life.  
+
+Examples of natural disasters:
+ • Earthquakes  
+ • Hurricanes  
+ • Floods  
+ • Tsunamis  
+ • Volcanoes  
+ • Wildfires  
+ • Droughts  
+ • Landslides  
+                """
               ),
-              
             ],
           ),
       ),
     );
   }
 }
-class HowGetPreparated extends StatelessWidget {
-  const HowGetPreparated ({ super.key });
 
-  final TextStyle titleStyle = const TextStyle(
-    fontSize: 25.0,
-    fontWeight: FontWeight.bold
-  );
+class HowGetPreparatedPage extends StatelessWidget {
+  const HowGetPreparatedPage ({ super.key });
 
   @override
   Widget build(BuildContext context) {
 
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
       
             children: [
               Text(
-                'What is a Natural Disaster ? ',
+                'How Can you get prepared ?',
                 style: titleStyle,
                 textAlign: TextAlign.start,
               ),
       
-              const Divider(),
-      
-              const SizedBox(height: 15.0,),
-      
-              const Text(
-                'Introduction',
-                style: TextStyle(fontSize: 15.0),
-              ),
-      
-              const SizedBox(height: 15.0,),
-      
-              const Text(
-                """ 
-                A natural disaster is a catastrophic event caused by natural processes that overwhelm local resources and threaten the function and safety of a community. 
-                """
-              ),
-              const SizedBox(height: 15.0,),
-              const Text(
-                '''
-                These events are often sudden and destructive, resulting in significant loss of life, property damage, and environmental disruption.
-                '''
-              ),
+              Divider(),
 
-              const Text(
+              SizedBox(height: 15.0,),
+      
+              Text(
                 """ 
-                These events are often sudden and destructive, resulting in significant loss of life, property damage, and environmental disruption.  
-                """
-              ),
+Preparing for a natural disaster is crucial to ensuring your safety and well-being. Here are some essential steps you can take:
 
-              const Text(
-                """ 
-                Key characteristics of a natural disaster:
-                • Natural origin: Caused by forces of nature, not human actions.  
-                • Sudden and destructive: Often occur without warning and cause widespread damage.  
-                • Overwhelms resources: Exceeds the capacity of a community to respond effectively.  
-                • Significant impact: Leads to loss of life, property damage, and disruption of normal life.  
-                
-                Examples of natural disasters:
-                • Earthquakes  
-                • Hurricanes  
-                • Floods  
-                • Tsunamis  
-                • Volcanoes  
-                • Wildfires  
-                • Droughts  
-                • Landslides  
+Create a Disaster Plan
+ • Identify potential hazards: Determine the types of natural disasters your area is prone to (hurricanes, earthquakes, floods, etc.).
+ • Develop an evacuation plan: Establish escape routes and meeting points for your family. 
+ • Communicate with family: Discuss how you will contact each other if separated.
+
+Assemble a Disaster Supply Kit
+ • Essential supplies: Include water, non-perishable food, first aid kit, flashlight, batteries, a battery-powered radio, medications, personal hygiene items, and important documents.  
+ • Consider your needs: Tailor your kit to your specific needs, such as items for infants, elderly family members, or pets.
+
+Protect Your Home
+ • Secure belongings: Anchor heavy furniture, secure water heaters, and install storm shutters or impact-resistant windows.  
+ • Insurance review: Ensure you have adequate homeowners or renters insurance coverage.
+
+Stay Informed
+ • Monitor weather alerts: Stay updated on weather conditions and warnings.
+ • Know emergency contacts: Have the numbers for local emergency services readily available.
+
+Practice and Prepare
+ • Emergency drills: Conduct practice drills to familiarize your family with the plan.  
+ • First aid training: Learn basic first aid and CPR.
+ • Emotional preparedness: Discuss potential emotional impacts and coping strategies.
+
+Remember: Early preparation is key to minimizing the impact of a natural disaster. By following these steps, you can increase your chances of staying safe and recovering quickly.
+
                 """
               ),
               
@@ -378,39 +319,64 @@ class HowGetPreparated extends StatelessWidget {
   }
 }
 
+class EmergencyKitPage extends StatelessWidget {
+  const EmergencyKitPage ({ super.key });
 
-// class UnorderedList extends StatelessWidget {
-//   const UnorderedList(this.texts, {super.key});
-//   final List<String> texts;
+  @override
+  Widget build(BuildContext context) {
 
-//   @override
-//   Widget build(BuildContext context) {
-//     var widgetList = <Widget>[];
-//     for (var text in texts) {
-//       // Add list item
-//       widgetList.add(UnorderedListItem(text));
-//       // Add space between items
-//       widgetList.add(SizedBox(height: 5.0));
-//     }
+    return const SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
 
-//     return Column(children: widgetList);
-//   }
-// }
+            children: [
+              Text(
+                'How Can you get prepared?',
+                style: titleStyle,
+                textAlign: TextAlign.start,
+              ),
+      
+              Divider(),
 
-// class UnorderedListItem extends StatelessWidget {
-//   const UnorderedListItem(this.text, {super.key});
-//   final String text;
+              SizedBox(height: 15.0,),
+      
+              Text(
+                """ 
+A well-stocked emergency kit can be a lifesaver in a crisis. Here's a list of essential items to include:
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: <Widget>[
-//         const Text("• "),
-//         Expanded(
-//           child: Text(text),
-//         ),
-//       ],
-//     );
-//   }
-// }
+Basic Supplies
+ • Water: One gallon per person, per day for at least three days.
+ • Food: Non-perishable items like canned goods, energy bars, and dried fruit.
+ • First aid kit: Including bandages, antiseptic wipes, pain relievers, and any necessary medications.
+ • Flashlight and extra batteries: Or a battery-powered or hand-crank radio.
+ • Battery-powered or hand-crank radio: For weather updates and emergency information.
+ • Extra batteries: For your flashlight, radio, and other electronic devices.
+ • Whistle: To signal for help.
+ • Matches or lighter: In a waterproof container.
+ • Garbage bags and moist towelettes: For personal hygiene.
+ • Local maps: In case of power outages or road closures.
+ • Manual can opener: For canned food.
+ • Cash and coins: ATMs may not work.
+ • Important documents: Copies of identification, insurance policies, and medical information.
+
+Additional Items
+ • Medications: A list of all medications and prescriptions.
+ • Eyeglasses and contact lenses: With extra supplies.
+ • Personal hygiene items: Toothbrush, toothpaste, soap, etc.
+ • Feminine hygiene products: For women.
+ • Baby supplies: If applicable, including diapers, formula, and baby food.
+ • Pet supplies: Food, water, medications, and leashes.
+ • Tools: Multi-purpose tool, duct tape, and work gloves.
+ • Books, games, or puzzles: For children or to pass the time.
+
+Remember: Customize your kit based on your specific needs and the types of emergencies likely to occur in your area. It's also essential to regularly review and update your kit to ensure it's always ready.
+                """
+              ),
+            ],
+          ),
+      ),
+    );
+  }
+}
