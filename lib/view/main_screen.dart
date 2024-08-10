@@ -1,11 +1,8 @@
+import 'package:ada_app_flutter/view/chat_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-import '../widgets/clickable_card_home.dart';
-import '../widgets/notice_card.dart';
-import '../widgets/preparation_card_home.dart';
-import '../widgets/title_card_home.dart';
-import 'quiz_screen.dart';
+import 'contacts_screen.dart';
+import 'menu_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -17,9 +14,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int currentPageIndex = 0;
 
-  Color emergencyKitColor = const Color(0xFFF1B505);
-  Color mapsColor = const Color(0xFF3F80EA);
-
   Color navBarBackground = const Color(0xFFE88C38);
   Color navBarIndicator = const Color(0xFF3F80EA);
 
@@ -27,6 +21,12 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     const navBarIcon = Color(0xFFFFFFFF);
     // const navBarIconEmergency = Color(0xFFFF0000);
+
+    const List<Widget> pages = [
+      Menu(),
+      ChatScreen(isEmergency: true),
+      Contacts()
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -41,84 +41,8 @@ class _MainScreenState extends State<MainScreen> {
               onPressed: () {}, icon: const Icon(Icons.settings_outlined))
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            PreparationCardHome(
-              onTapPreparation: () {
-                Navigator.pushNamed(context, '/preparation');
-              },
-              onTapIntroduction: () {
-                print('Test tap Emergency Introduction');
-              },
-              onTapPlanning: () {
-                print('Test tap Emergency Planning');
-              },
-              onTapSimulate: () {
-                print('Test tap Emergency Simulate');
-              },
-            ),
-            ClickableCardHome(
-              color: mapsColor,
-              titleCard: 'Quiz',
-              image: 'lib/images/SurviveKit.png',
-              description:
-                  'Use Gemini IA to personalize your emergency kit according to the emergency situation',
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => QuizScreen()),
-              ),
-            ),
-            ClickableCardHome(
-              color: emergencyKitColor,
-              titleCard: 'Emergency Kit',
-              image: 'lib/images/SurviveKit.png',
-              description:
-                  'Use Gemini IA to personalize your emergency kit according to the emergency situation',
-              onTap: () => {Navigator.pushNamed(context, '/emergency-kit')},
-            ),
-            ClickableCardHome(
-              color: mapsColor,
-              titleCard: 'Chat',
-              image: 'lib/images/image_maps.jpg',
-              description: "I'm here to help, so feel free to ask anything!",
-              onTap: () => {Navigator.pushNamed(context, '/chat')},
-            ),
-            ClickableCardHome(
-              color: Colors.green,
-              titleCard: 'Alerts',
-              image: 'lib/images/warning.png',
-              description: 'Look for shelters nearby and define escape routes',
-              onTap: () => {Navigator.pushNamed(context, '/alerts')},
-            ),
-            Column(
-              children: [
-                const TitleCardHome(title: 'Updated News'),
-                NoticeCard(
-                  title: 'Earthquake on Japan',
-                  description:
-                      'Cracked street after earthquake .ADA were used to spare alerts to the population to avoid the most affected areas and roads',
-                  image: 'lib/images/ex_notice1.png',
-                  time: 'Today - 23min',
-                  onTap: () {
-                    print('Test tap Notice 1');
-                  },
-                ),
-                NoticeCard(
-                  title: 'Floods in Brazil, in Rio Grande do Sul State ',
-                  description:
-                      'Description duis aute irure dolor in reprehenderit in voluptate velit.',
-                  image: 'lib/images/ex_notice2.png',
-                  time: 'Today - 23min',
-                  onTap: () {
-                    print('Test tap Notice 2');
-                  },
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
+      body: pages[currentPageIndex],
+      
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
           setState(() {

@@ -26,7 +26,7 @@ class _AlertsScreenState extends State<AlertsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Alerts'),
-        backgroundColor: Color(0xFFF2923A),
+        backgroundColor: const Color(0xFFF2923A),
       ),
       body: SingleChildScrollView(
         child: Column(

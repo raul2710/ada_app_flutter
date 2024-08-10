@@ -12,23 +12,21 @@ class Preparation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Preparation')),
-        body: const PageViewExample(),
-      ),
+    return Scaffold(
+      appBar: AppBar(title: const Text('Preparation')),
+      body: const PageViewPreparation(),
     );
   }
 }
 
-class PageViewExample extends StatefulWidget {
-  const PageViewExample({super.key});
+class PageViewPreparation extends StatefulWidget {
+  const PageViewPreparation({super.key});
 
   @override
-  State<PageViewExample> createState() => _PageViewExampleState();
+  State<PageViewPreparation> createState() => _PageViewPreparationState();
 }
 
-class _PageViewExampleState extends State<PageViewExample>
+class _PageViewPreparationState extends State<PageViewPreparation>
   with TickerProviderStateMixin {
     
   late PageController _pageViewController;
@@ -90,7 +88,6 @@ class _PageViewExampleState extends State<PageViewExample>
       curve: Curves.easeInOut,
     );
   }
-
 }
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {

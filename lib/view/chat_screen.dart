@@ -9,7 +9,9 @@ import '../utils/size.dart';
 import '../utils/style.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+  const ChatScreen({super.key, this.isEmergency=false});
+  
+  final bool isEmergency;
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -24,6 +26,17 @@ class _ChatScreenState extends State<ChatScreen> {
   final List<Message> _messages = [];
 
   final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    
+    if (widget.isEmergency) {
+      _userMessage.text = 'Help me what can I do in a disaster?';
+      sendMessage();
+    }
+  }
 
   void sendMessage() async {
     final message = _userMessage.text;
@@ -40,7 +53,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     final content = [Content.text(message)];
     final response = await model.generateContent(content);
-
+    
     setState(() {
       _messages.add(Message(
         isUser: false,
@@ -59,8 +72,9 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
-      appBar: AppBar(
+      backgroundColor: const Color(0xFFFFFFFF),
+      appBar: widget.isEmergency ? null : AppBar(
+        foregroundColor:const Color(0xFFFFFFFF),
         backgroundColor: background,
         title: Text('Chat with Me!',
             style:
@@ -90,6 +104,7 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Expanded(
               flex: 20,
               child: TextFormField(
+                cursorColor: Colors.black,
                 maxLines: 6,
                 minLines: 1,
                 controller: _userMessage,
@@ -112,16 +127,16 @@ class _ChatScreenState extends State<ChatScreen> {
                             width: medium,
                             height: medium,
                             margin: const EdgeInsets.all(xsmall),
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(white),
+                            child: const CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
                               strokeWidth: 3,
                             ),
                           )
                         : Icon(
                             Icons.arrow_upward,
                             color: _userMessage.text.isNotEmpty
-                                ? Colors.white
-                                : const Color(0x5A6C6C65),
+                                ? Colors.black
+                                : const Color(0x5A6C6C65)
                           ),
                   ),
                 ),
