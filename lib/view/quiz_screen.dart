@@ -105,10 +105,12 @@ class QuizScreen extends StatelessWidget {
     ),
   ];
 
+  QuizScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Disaster Preparedness Quiz')),
+      appBar: AppBar(title: const Text('Disaster Preparedness Quiz')),
       body: ListView.builder(
         itemCount: questions.length,
         itemBuilder: (context, index) {

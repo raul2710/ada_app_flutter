@@ -330,7 +330,7 @@ class EmergencyKitPage extends StatelessWidget {
 
             children: [
               Text(
-                'How Can you get prepared?',
+                'Emergency Kit',
                 style: titleStyle,
                 textAlign: TextAlign.start,
               ),

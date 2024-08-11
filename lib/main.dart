@@ -11,38 +11,9 @@ import 'view/login_options_screen.dart';
 import 'view/login_with_email_and_password_screen.dart';
 import 'view/main_screen.dart';
 import 'view/preparation_screen.dart';
+import 'view/quiz_screen.dart';
 import 'view/subscribe_email_password.dart';
 import 'view/subscribe_screen.dart';
-
-// void main() {
-//   runApp(const MainApp());
-// }
-
-// class MainApp extends StatelessWidget {
-//   const MainApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const MaterialApp(
-//       home: Scaffold(
-//         body: Center(
-//           child: Text('Hello World!'),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// import 'package:firebase_core/firebase_core.dart';
-// import 'firebase_options.dart';
-
-// // ...
-
-// await Firebase.initializeApp(
-//     options: DefaultFirebaseOptions.currentPlatform,
-// );
-const clientId =
-    '830251467767-otheok9k6qetdqnh9m7i08jjplsl92nm.apps.googleusercontent.com';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -84,13 +55,7 @@ class MainApp extends StatelessWidget {
           '/emergency-kit': (context) => const EmergencyKit(),
           '/alerts': (context) => const AlertsScreen(),
           '/chat': (context) => const ChatScreen(),
-
-          // 'screenAddTrip' :(context) => ScreenAddTrip(),
-          // 'screenViewTrip' :(context) => ScreenViewTrip(),
-          // 'screenSearchTrip' :(context) => ScreenSearchTrip(),
-          // 'screenListCategory' :(context) => ScreenListCategory(),
-          // 'screenSearchTripCategory' :(context) => ScreenSearchTripCategory(),
-          // 'screenAbout' :(context) => ScreenAbout(),
+          '/quiz': (context) => QuizScreen(),
         });
   }
 }
