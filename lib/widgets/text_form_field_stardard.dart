@@ -41,8 +41,8 @@ class Textformfieldstardard extends StatelessWidget {
         ),
         border: const OutlineInputBorder(),
         prefixIconColor: const Color(0xFFE88C38),
-        floatingLabelStyle: const TextStyle(color:  Color(0xFFE88C38),),
-        labelStyle: const TextStyle(color:  Color(0xFFE88C38),),
+        floatingLabelStyle: const TextStyle(color: Color(0xFFE88C38),),
+        labelStyle: const TextStyle(color: Color(0xFFE88C38),),
       ),
 
       validator: (value) {

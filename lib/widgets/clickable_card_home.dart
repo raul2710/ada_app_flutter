@@ -44,6 +44,9 @@ class ClickableCardHome extends StatelessWidget {
               alignment: AlignmentDirectional.centerStart,
               child: Text(
                 description,
+                style: const TextStyle(
+                  color: Colors.white
+                ),
               ),
             ),
           ],

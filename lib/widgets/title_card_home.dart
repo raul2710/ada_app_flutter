@@ -14,6 +14,7 @@ class TitleCardHome extends StatelessWidget {
   Widget build(BuildContext context) {
 
     const titleStyleCardHome = TextStyle(
+      color: Colors.white,
       fontSize: 15.0
     );
 
@@ -23,7 +24,7 @@ class TitleCardHome extends StatelessWidget {
           title,
           style: titleStyleCardHome,
         ),
-        const Icon(Icons.arrow_forward),
+        const Icon(Icons.arrow_forward, color: Colors.white,),
       ],
     );
   }

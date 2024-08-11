@@ -16,6 +16,9 @@ class _MenuState extends State<Menu> {
 
   Color mapsColor = const Color(0xFF3F80EA);
   Color emergencyKitColor = const Color(0xFFF1B505);
+  Color quizColor = const Color(0xFFE88C38);
+  Color chatColor = const Color(0xFF009918);
+  Color alertColor = const Color(0xFF555555);
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +41,9 @@ class _MenuState extends State<Menu> {
               },
             ),
             ClickableCardHome(
-              color: mapsColor,
+              color: quizColor,
               titleCard: 'Quiz',
-              image: 'lib/images/SurviveKit.png',
+              image: 'lib/images/quiz_image.png',
               description:
                   'Test your knowledge about how to deal with a disaster situation',
               onTap: () => {Navigator.pushNamed(context, '/quiz')},
@@ -54,16 +57,16 @@ class _MenuState extends State<Menu> {
               onTap: () => {Navigator.pushNamed(context, '/emergency-kit')},
             ),
             ClickableCardHome(
-              color: mapsColor,
+              color: chatColor,
               titleCard: 'Chat',
-              image: 'lib/images/image_maps.jpg',
+              image: 'lib/images/chat_image.png',
               description: "Use the Gemini IA chat for ask anything about natural disasters",
               onTap: () => {Navigator.pushNamed(context, '/chat')},
             ),
             ClickableCardHome(
-              color: Colors.green,
+              color: alertColor,
               titleCard: 'Alerts',
-              image: 'lib/images/warning.png',
+              image: 'lib/images/alerts_image.png',
               description: 'The most importants disasters alerts around you',
               onTap: () => {Navigator.pushNamed(context, '/alerts')},
             ),
