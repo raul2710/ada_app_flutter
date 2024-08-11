@@ -140,7 +140,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           ),
                   ),
                 ),
-                style: promptText,
+                style: GoogleFonts.poppins(color: Colors.black, fontSize: small),
                 onChanged: (value) {
                   setState(() {});
                 },
