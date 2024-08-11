@@ -28,7 +28,7 @@ class PreparationCardHome extends StatelessWidget {
                   Column(
                     children: [
                   
-                      const TitleCardHome(title: 'Preparation'),
+                      const TitleCardHome(title: 'Preparation', isWhite: false,),
                   
                       Container(
                         width: MediaQuery.of(context).size.width,

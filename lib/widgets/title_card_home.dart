@@ -5,16 +5,17 @@ class TitleCardHome extends StatelessWidget {
   const TitleCardHome({
     super.key,
     required this.title,
+    this.isWhite = true
   });
 
   final String title;
-
+  final bool isWhite;
 
   @override
   Widget build(BuildContext context) {
-
-    const titleStyleCardHome = TextStyle(
-      color: Colors.white,
+    
+    var titleStyleCardHome = TextStyle(
+      color: isWhite ? Colors.white : Colors.black,
       fontSize: 15.0
     );
 
@@ -24,7 +25,7 @@ class TitleCardHome extends StatelessWidget {
           title,
           style: titleStyleCardHome,
         ),
-        const Icon(Icons.arrow_forward, color: Colors.white,),
+        Icon(Icons.arrow_forward, color: isWhite ? Colors.white : Colors.black,),
       ],
     );
   }

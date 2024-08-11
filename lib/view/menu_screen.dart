@@ -72,7 +72,7 @@ class _MenuState extends State<Menu> {
             ),
             Column(
               children: [
-                const TitleCardHome(title: 'Updated News'),
+                const TitleCardHome(title: 'Updated News', isWhite: false,),
                 NoticeCard(
                   title: 'Floods in Brazil, in Rio Grande do Sul State ',
                   description:
