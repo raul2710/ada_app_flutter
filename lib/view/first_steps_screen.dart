@@ -140,7 +140,7 @@ class _FirstStepsScreenState extends State<FirstStepsScreen> {
 
                   TextButtonStandard(
                     text: 'Continue',
-                    onPressed: (){},
+                    onPressed: ()=>{Navigator.pushNamed(context, '/main')},
                   ),
                 ],
                ),
